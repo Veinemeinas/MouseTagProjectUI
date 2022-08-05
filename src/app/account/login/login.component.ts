@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AccountLogin } from '../../account/models/account-login.model';
 import { AccountLoginService } from '../../account/services/account-login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,10 @@ import { AccountLoginService } from '../../account/services/account-login.servic
 export class LoginComponent implements OnInit {
   accountLogin: AccountLogin;
 
-  constructor(private accountLoginService: AccountLoginService) {}
+  constructor(
+    private accountLoginService: AccountLoginService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.resetForm();
@@ -26,12 +30,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(userLoginForm: NgForm) {
-    this.accountLoginService
-      .LoginUser(this.accountLogin)
-      .subscribe((data: any) => {
-        if (data.Succeded == true) {
-          this.resetForm(userLoginForm);
-        }
-      });
+    this.accountLoginService.LoginUser(this.accountLogin).subscribe(
+      (data: any) => {
+        localStorage.setItem('token', data.token);
+        this.router.navigateByUrl('/home');
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

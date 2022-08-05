@@ -28,7 +28,9 @@
                   required
                 />
                 <label for="floatingInput">El.paštas</label>
+                <div class="invalid-feedback">Please provide</div>
               </div>
+
               <div class="form-floating">
                 <input
                   type="password"
@@ -59,11 +61,7 @@
               </div>
 
               <div class="d-grid gap-2">
-                <button
-                  class="btn btn-primary pt-2 pb-2"
-                  type="submit"
-                  [disabled]="userLoginForm.invalid"
-                >
+                <button class="btn btn-primary pt-2 pb-2" type="submit">
                   Prisijungti
                 </button>
               </div>
