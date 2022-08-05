@@ -12,19 +12,15 @@ import { ButtonModule } from 'primeng/button';
 import { LoginComponent } from './account/login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SignUpComponent } from './dashboard/sign-up/sign-up.component';
-import { CandidateTableComponent } from './candidate-table/candidate-table.component';
-import { ShowCandidateComponent } from './candidate-table/show-candidate/show-candidate.component';
-import { AddEditCandidateComponent } from './candidate-table/add-edit-candidate/add-edit-candidate.component';
-import { CandidateTableApiService } from './services/candidate-table-api.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     PageNotFoundComponent,
     SignUpComponent,
-    CandidateTableComponent, 
-    ShowCandidateComponent,
-    AddEditCandidateComponent
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +29,7 @@ import { CandidateTableApiService } from './services/candidate-table-api.service
     HttpClientModule,
     FormsModule,
   ],
-  providers: [AccountService, AccountLoginService, CandidateTableApiService],
+  providers: [AccountService, AccountLoginService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
