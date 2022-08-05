@@ -3,21 +3,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 //import { Response } from '@angular/common/http';
 import { Observable } from 'rxjs';
 //import 'rxjs/add/operator/map';
-import { Account } from './account.model';
+import { AccountLogin } from '../models/account-login.model';
 
-@Injectable()
-export class AccountService {
+@Injectable({
+  providedIn: 'root',
+})
+export class AccountLoginService {
   readonly rootUrl = 'https://localhost:7271';
   constructor(private https: HttpClient) {}
-  SignUpUser(account: Account) {
+
+  LoginUser(account: AccountLogin) {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     let options = { headers: headers };
-    //const body: Account;
 
-    return this.https.post(
-      this.rootUrl + '/api/Auth/Register',
-      account,
-      options
-    );
+    return this.https.post(this.rootUrl + '/api/Auth/Login', account, options);
   }
 }

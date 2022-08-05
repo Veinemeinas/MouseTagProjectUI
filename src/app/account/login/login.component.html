@@ -11,12 +11,16 @@
                 alt="Logo"
               />
             </div>
-            <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <form
+              #userLoginForm="ngForm"
+              autocomplete="off"
+              (submit)="onSubmit(userLoginForm)"
+            >
               <div class="form-floating mb-3">
                 <input
                   #Email="ngModel"
                   name="Email"
-                  [(ngModel)]="formModel.Email"
+                  [(ngModel)]="accountLogin.email"
                   type="email"
                   class="form-control"
                   id="floatingInput"
@@ -31,7 +35,7 @@
                   class="form-control"
                   #Password="ngModel"
                   name="Password"
-                  [(ngModel)]="formModel.Password"
+                  [(ngModel)]="accountLogin.password"
                   id="floatingPassword"
                   placeholder="Password"
                   required
@@ -58,7 +62,7 @@
                 <button
                   class="btn btn-primary pt-2 pb-2"
                   type="submit"
-                  [disabled]="form.invalid"
+                  [disabled]="userLoginForm.invalid"
                 >
                   Prisijungti
                 </button>

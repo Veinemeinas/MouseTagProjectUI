@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AccountLogin } from '../../account/models/account-login.model';
+import { AccountLoginService } from '../../account/services/account-login.service';
 
 @Component({
   selector: 'app-login',
@@ -7,14 +9,29 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  formModel = {
-    Email: '',
-    Password: '',
-  };
+  accountLogin: AccountLogin;
 
-  constructor() {}
+  constructor(private accountLoginService: AccountLoginService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.resetForm();
+  }
 
-  onSubmit(form: NgForm) {}
+  resetForm(userLoginForm?: NgForm) {
+    if (userLoginForm != null) userLoginForm.reset();
+    this.accountLogin = {
+      email: '',
+      password: '',
+    };
+  }
+
+  onSubmit(userLoginForm: NgForm) {
+    this.accountLoginService
+      .LoginUser(this.accountLogin)
+      .subscribe((data: any) => {
+        if (data.Succeded == true) {
+          this.resetForm(userLoginForm);
+        }
+      });
+  }
 }

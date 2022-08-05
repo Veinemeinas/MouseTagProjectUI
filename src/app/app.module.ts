@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { AccountService } from './dashboard/shared/account.service';
+import { AccountService } from './dashboard/services/account.service';
+import { AccountLoginService } from './account/services/account-login.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +27,7 @@ import { SignUpComponent } from './dashboard/sign-up/sign-up.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [AccountService],
+  providers: [AccountService, AccountLoginService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

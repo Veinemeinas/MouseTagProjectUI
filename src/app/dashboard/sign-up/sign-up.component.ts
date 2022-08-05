@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Account } from '../../dashboard/shared/account.model';
-import { AccountService } from '../../dashboard/shared/account.service';
+import { Account } from '../../dashboard/models/account.model';
+import { AccountService } from '../../dashboard/services/account.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,8 +17,8 @@ export class SignUpComponent implements OnInit {
     this.resetForm();
   }
 
-  resetForm(form?: NgForm) {
-    if (form != null) form.reset();
+  resetForm(userRegistrationForm?: NgForm) {
+    if (userRegistrationForm != null) userRegistrationForm.reset();
     this.account = {
       email: '',
       password: '',
