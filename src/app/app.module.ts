@@ -12,6 +12,7 @@ import { ButtonModule } from 'primeng/button';
 import { LoginComponent } from './account/login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SignUpComponent } from './dashboard/sign-up/sign-up.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SignUpComponent } from './dashboard/sign-up/sign-up.component';
     LoginComponent,
     PageNotFoundComponent,
     SignUpComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
