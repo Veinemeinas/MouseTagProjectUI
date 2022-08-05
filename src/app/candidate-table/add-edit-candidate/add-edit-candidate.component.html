@@ -1,0 +1,10 @@
+<form>
+    <div class="mb-3">
+        <label for="name" class="form-label">Technologija</label>
+        <!-- <input type="text" class="form-control" name="technology" [(ngModel)]="technology" *ngIf=
+        "candidate.technologies"> -->
+        <select class="form-control" name="technology" id="technology">
+            <option *ngFor="let technology of technologyList$|async" value="technology.id">{{technology.technologyName}}</option>
+        </select>
+    </div>
+</form>
