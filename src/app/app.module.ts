@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { AccountService } from './shared/account.service';
+import { AccountService } from './dashboard/shared/account.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
