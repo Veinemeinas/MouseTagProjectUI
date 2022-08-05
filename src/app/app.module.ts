@@ -13,6 +13,10 @@ import { LoginComponent } from './account/login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SignUpComponent } from './dashboard/sign-up/sign-up.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CandidateTableComponent } from './candidate-table/candidate-table.component';
+import { ShowCandidateComponent } from './candidate-table/show-candidate/show-candidate.component';
+import { AddEditCandidateComponent } from './candidate-table/add-edit-candidate/add-edit-candidate.component';
+import { CandidateTableApiService } from './services/candidate-table-api.service';
 
 @NgModule({
   declarations: [
@@ -21,6 +25,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     PageNotFoundComponent,
     SignUpComponent,
     DashboardComponent,
+    CandidateTableComponent,
+    ShowCandidateComponent,
+    AddEditCandidateComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +36,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [AccountService, AccountLoginService],
+  providers: [AccountService, AccountLoginService, CandidateTableApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
