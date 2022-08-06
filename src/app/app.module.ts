@@ -17,6 +17,8 @@ import { CandidateTableComponent } from './dashboard/candidate-table/candidate-t
 import { ShowCandidateComponent } from './dashboard/candidate-table/show-candidate/show-candidate.component';
 import { AddEditCandidateComponent } from './dashboard/candidate-table/add-edit-candidate/add-edit-candidate.component';
 import { CandidateTableApiService } from './dashboard/candidate-table/services/candidate-table-api.service';
+import { NavbarComponent } from './dashboard/navbar/navbar.component';
+import { NavbarSideComponent } from './dashboard/navbar-side/navbar-side.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { CandidateTableApiService } from './dashboard/candidate-table/services/c
     CandidateTableComponent,
     ShowCandidateComponent,
     AddEditCandidateComponent,
+    NavbarComponent,
+    NavbarSideComponent,
   ],
   imports: [
     BrowserModule,

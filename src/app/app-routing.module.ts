@@ -4,12 +4,11 @@ import { LoginComponent } from './login-ui/login/login.component';
 import { SignUpComponent } from './dashboard/sign-up/sign-up.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { CandidateTableComponent } from './dashboard/candidate-table/candidate-table.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: CandidateTableComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];
