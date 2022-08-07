@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  accountLogin: AccountLogin;
+  accountLogin: AccountLogin = new AccountLogin();
 
   constructor(
     private accountLoginService: AccountLoginService,
@@ -30,14 +30,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(userLoginForm: NgForm) {
-    this.accountLoginService.LoginUser(this.accountLogin).subscribe(
-      (data: any) => {
-        localStorage.setItem('token', data.token);
+    this.accountLoginService
+      .LoginUser(this.accountLogin)
+      .subscribe((res: any) => {
+        const token = res.message;
+        localStorage.setItem('token', token);
         this.router.navigateByUrl('dashboard');
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+      });
   }
 }

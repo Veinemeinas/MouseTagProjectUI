@@ -14,9 +14,39 @@
         <i class="sidenav-link-icon"
           ><span [class]="data.icon">{{ data.label }}</span></i
         >
-        <span class="sidenav-link-text" *ngIf="collapsed"
-          >Kandidatų sąrašas</span
+        <span class="sidenav-link-text" *ngIf="collapsed">Kandidatai</span>
+      </a>
+    </li>
+    <li class="sidenav-nav-item" *ngFor="let data of navData">
+      <a class="sidenav-nav-link" [routerLink]="data.routeLink">
+        <i class="sidenav-link-icon"
+          ><span [class]="data.icon">{{ data.label }}</span></i
         >
+        <span class="sidenav-link-text" *ngIf="collapsed">Kalendorius</span>
+      </a>
+    </li>
+    <li class="sidenav-nav-item" *ngFor="let data of navData">
+      <a class="sidenav-nav-link" [routerLink]="data.routeLink">
+        <i class="sidenav-link-icon"
+          ><span [class]="data.icon">{{ data.label }}</span></i
+        >
+        <span class="sidenav-link-text" *ngIf="collapsed">Importinimas</span>
+      </a>
+    </li>
+    <li class="sidenav-nav-item" *ngFor="let data of navData">
+      <a class="sidenav-nav-link" [routerLink]="data.routeLink">
+        <i class="sidenav-link-icon"
+          ><span [class]="data.icon">{{ data.label }}</span></i
+        >
+        <span class="sidenav-link-text" *ngIf="collapsed">Nustatymai</span>
+      </a>
+    </li>
+    <li class="sidenav-nav-item" *ngFor="let data of navData">
+      <a class="sidenav-nav-link" [routerLink]="data.routeLink">
+        <i class="sidenav-link-icon"
+          ><span [class]="data.icon">{{ data.label }}</span></i
+        >
+        <span class="sidenav-link-text" *ngIf="collapsed">Atsijungti</span>
       </a>
     </li>
   </ul>

@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-//import { Response } from '@angular/common/http';
-import { Observable } from 'rxjs';
-//import 'rxjs/add/operator/map';
 import { AccountLogin } from '../models/account-login.model';
 
 @Injectable({

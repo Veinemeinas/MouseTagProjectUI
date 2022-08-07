@@ -8,3 +8,7 @@ body {
   position: relative;
   font-family: "Montserrat", sans-serif !important;
 }
+
+.modal-backdrop {
+  display: none;
+}

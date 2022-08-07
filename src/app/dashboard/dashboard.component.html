@@ -1,3 +1,4 @@
-<!-- <app-candidate-table></app-candidate-table> -->
-
 <app-navbar-side (onToggleSideNav)="onToggleSideNav($event)"></app-navbar-side>
+<div class="body" [ngClass]="getBodyClass()">
+  <app-candidate-table></app-candidate-table>
+</div>
