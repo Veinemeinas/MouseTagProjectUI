@@ -1,1 +1,23 @@
-<p>navbar-side works!</p>
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapse()">A</button>
+    <div class="logo-text" *ngIf="collapsed">Angular</div>
+    <button
+      class="btn-close btn-close-white"
+      *ngIf="collapsed"
+      (click)="closeSidenav()"
+    ></button>
+  </div>
+  <ul class="sidenav-nav list-unstyled">
+    <li class="sidenav-nav-item" *ngFor="let data of navData">
+      <a class="sidenav-nav-link" [routerLink]="data.routeLink">
+        <i class="sidenav-link-icon"
+          ><span [class]="data.icon">{{ data.label }}</span></i
+        >
+        <span class="sidenav-link-text" *ngIf="collapsed"
+          >Kandidatų sąrašas</span
+        >
+      </a>
+    </li>
+  </ul>
+</div>
