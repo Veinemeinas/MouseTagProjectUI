@@ -1,7 +1,13 @@
 <div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed' : ''">
   <div class="logo-container">
-    <button class="logo" (click)="toggleCollapse()">A</button>
-    <div class="logo-text" *ngIf="collapsed">Angular</div>
+    <button class="logo" (click)="toggleCollapse()">
+      <img
+        class="img-fluid"
+        src="/assets/images/logo_fav-ic.png"
+        alt="icon_logo"
+      />
+    </button>
+    <div class="logo-text" *ngIf="collapsed">XplicityHr</div>
     <button
       class="btn-close btn-close-white"
       *ngIf="collapsed"
@@ -20,7 +26,7 @@
     <li class="sidenav-nav-item" *ngFor="let data of navData">
       <a class="sidenav-nav-link" [routerLink]="data.routeLink">
         <i class="sidenav-link-icon"
-          ><span [class]="data.icon">{{ data.label }}</span></i
+          ><span [class]="data.icon">calendar_month</span></i
         >
         <span class="sidenav-link-text" *ngIf="collapsed">Kalendorius</span>
       </a>
@@ -28,7 +34,7 @@
     <li class="sidenav-nav-item" *ngFor="let data of navData">
       <a class="sidenav-nav-link" [routerLink]="data.routeLink">
         <i class="sidenav-link-icon"
-          ><span [class]="data.icon">{{ data.label }}</span></i
+          ><span [class]="data.icon">publish</span></i
         >
         <span class="sidenav-link-text" *ngIf="collapsed">Importinimas</span>
       </a>
@@ -36,16 +42,14 @@
     <li class="sidenav-nav-item" *ngFor="let data of navData">
       <a class="sidenav-nav-link" [routerLink]="data.routeLink">
         <i class="sidenav-link-icon"
-          ><span [class]="data.icon">{{ data.label }}</span></i
+          ><span [class]="data.icon">settings</span></i
         >
         <span class="sidenav-link-text" *ngIf="collapsed">Nustatymai</span>
       </a>
     </li>
     <li class="sidenav-nav-item" *ngFor="let data of navData">
       <a class="sidenav-nav-link" [routerLink]="data.routeLink">
-        <i class="sidenav-link-icon"
-          ><span [class]="data.icon">{{ data.label }}</span></i
-        >
+        <i class="sidenav-link-icon"><span [class]="data.icon">logout</span></i>
         <span class="sidenav-link-text" *ngIf="collapsed">Atsijungti</span>
       </a>
     </li>
