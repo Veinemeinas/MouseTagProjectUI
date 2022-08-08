@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.resetForm();
+    if (localStorage.getItem('token') != null) {
+      this.router.navigateByUrl('/dashboard');
+    }
   }
 
   resetForm(userLoginForm?: NgForm) {

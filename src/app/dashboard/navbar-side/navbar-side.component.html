@@ -48,7 +48,11 @@
       </a>
     </li>
     <li class="sidenav-nav-item" *ngFor="let data of navData">
-      <a class="sidenav-nav-link" [routerLink]="data.routeLink">
+      <a
+        class="sidenav-nav-link"
+        [routerLink]="data.routeLink"
+        (click)="onLogout()"
+      >
         <i class="sidenav-link-icon"><span [class]="data.icon">logout</span></i>
         <span class="sidenav-link-text" *ngIf="collapsed">Atsijungti</span>
       </a>

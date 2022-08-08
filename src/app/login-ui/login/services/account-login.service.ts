@@ -15,4 +15,13 @@ export class AccountLoginService {
 
     return this.https.post(this.rootUrl + '/api/Auth/Login', account, options);
   }
+
+  getUserProfile() {
+    var tokenHeader = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    });
+    return this.https.get(this.rootUrl + '/api/Auth/usr', {
+      headers: tokenHeader,
+    });
+  }
 }

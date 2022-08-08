@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { navbarData } from './nav-data';
 
 interface SideNavToggle {
@@ -11,7 +12,7 @@ interface SideNavToggle {
   styleUrls: ['./navbar-side.component.css'],
 })
 export class NavbarSideComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
   collapsed = false;
@@ -34,5 +35,10 @@ export class NavbarSideComponent implements OnInit {
       collapsed: this.collapsed,
       screenWidth: this.screenWidth,
     });
+  }
+
+  onLogout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }
