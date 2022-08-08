@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login-ui/login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, PageNotFoundComponent],
@@ -24,7 +25,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     DashboardModule,
   ],
 
-  providers: [AccountLoginService],
+  providers: [
+    AccountLoginService,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AccountLogin } from '../models/account-login.model';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountLoginService {
   readonly rootUrl = 'https://localhost:7271';
-  constructor(private https: HttpClient) {}
+  constructor(private https: HttpClient, private jwtHelper: JwtHelperService) {}
 
   LoginUser(account: AccountLogin) {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -17,11 +18,10 @@ export class AccountLoginService {
   }
 
   getUserProfile() {
-    var tokenHeader = new HttpHeaders({
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    });
-    return this.https.get(this.rootUrl + '/api/Auth/usr', {
-      headers: tokenHeader,
-    });
+    var token = JSON.stringify(localStorage.getItem('token'));
+    console.log(this.jwtHelper.decodeToken(token));
+    const email = this.jwtHelper.decodeToken(token);
+    const emaili = email['Email'];
+    return emaili;
   }
 }

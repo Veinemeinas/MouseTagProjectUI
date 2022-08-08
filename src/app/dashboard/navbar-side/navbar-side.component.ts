@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { navbarData } from './nav-data';
+import { AccountLoginService } from './../../login-ui/login/services/account-login.service';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -12,9 +13,12 @@ interface SideNavToggle {
   styleUrls: ['./navbar-side.component.css'],
 })
 export class NavbarSideComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private service: AccountLoginService) {}
 
   ngOnInit(): void {}
+
+  email = this.service.getUserProfile();
+
   collapsed = false;
   screenWidth = 0;
   navData = navbarData;
