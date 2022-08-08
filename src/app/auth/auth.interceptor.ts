@@ -21,17 +21,17 @@ export class AuthInterceptor implements HttpInterceptor {
       const clonedReq = req.clone({
         headers: req.headers.set(
           'Authorization',
-          'Bearer' + localStorage.getItem('token')
+          'Bearer ' + localStorage.getItem('token')
         ),
       });
       return next.handle(clonedReq).pipe(
         tap(
           (succ) => {},
           (err) => {
-            if (err.status == 401) {
-              localStorage.removeItem('token');
-              this.router.navigateByUrl('/login');
-            }
+            // if (err.status == 401) {
+            //   localStorage.removeItem('token');
+            //   this.router.navigateByUrl('/login');
+            // }
           }
         )
       );
