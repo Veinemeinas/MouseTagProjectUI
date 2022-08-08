@@ -1,4 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  HostListener,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { navbarData } from './nav-data';
 import { AccountLoginService } from './../../login-ui/login/services/account-login.service';
@@ -15,15 +21,28 @@ interface SideNavToggle {
 export class NavbarSideComponent implements OnInit {
   constructor(private router: Router, private service: AccountLoginService) {}
 
-  ngOnInit(): void {}
-
   email = this.service.getUserProfile();
 
+  @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   collapsed = false;
   screenWidth = 0;
   navData = navbarData;
 
-  @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.screenWidth = window.innerWidth;
+    if (this.screenWidth <= 768) {
+      this.collapsed = false;
+      this.onToggleSideNav.emit({
+        collapsed: this.collapsed,
+        screenWidth: this.screenWidth,
+      });
+    }
+  }
+
+  ngOnInit(): void {
+    this.screenWidth = window.innerWidth;
+  }
 
   toggleCollapse(): void {
     this.collapsed = !this.collapsed;

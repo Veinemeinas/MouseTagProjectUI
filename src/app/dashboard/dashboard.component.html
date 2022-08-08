@@ -1,4 +1,3 @@
 <app-navbar-side (onToggleSideNav)="onToggleSideNav($event)"></app-navbar-side>
-<div class="body" [ngClass]="getBodyClass()">
-  <app-candidate-table></app-candidate-table>
-</div>
+<app-body [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth">
+</app-body>

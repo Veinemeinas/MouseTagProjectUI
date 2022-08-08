@@ -18,6 +18,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarSideComponent } from './navbar-side/navbar-side.component';
 import { BodyComponent } from './body/body.component';
 import { AppComponentt } from './dashboard.component';
+import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
+import { AccountPageComponent } from './account-page/account-page.component';
+import { CalendarPageComponent } from './calendar-page/calendar-page.component';
+import { ImportPageComponent } from './import-page/import-page.component';
+import { SettingsPageComponent } from './settings-page/settings-page.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +34,11 @@ import { AppComponentt } from './dashboard.component';
     NavbarComponent,
     NavbarSideComponent,
     BodyComponent,
+    DashboardPageComponent,
+    AccountPageComponent,
+    CalendarPageComponent,
+    ImportPageComponent,
+    SettingsPageComponent,
   ],
   imports: [
     CommonModule,

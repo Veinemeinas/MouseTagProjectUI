@@ -6,14 +6,25 @@ import { CandidateTableComponent } from './candidate-table/candidate-table.compo
 import { CommonModule } from '@angular/common';
 import { AuthGuard } from '../auth/auth.guard';
 
+import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
+import { AccountPageComponent } from './account-page/account-page.component';
+import { CalendarPageComponent } from './calendar-page/calendar-page.component';
+import { ImportPageComponent } from './import-page/import-page.component';
+import { SettingsPageComponent } from './settings-page/settings-page.component';
+
 const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard],
+    children: [
+      { path: 'candidates-table', component: DashboardPageComponent },
+      { path: 'profile', component: AccountPageComponent },
+      { path: 'calendar', component: CalendarPageComponent },
+      { path: 'import', component: ImportPageComponent },
+      { path: 'settings', component: SettingsPageComponent },
+    ],
   },
-  { path: 'candidates', component: CandidateTableComponent },
-  { path: 'signup', component: SignUpComponent },
 ];
 
 @NgModule({

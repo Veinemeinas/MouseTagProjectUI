@@ -1,81 +1,72 @@
-<section class="vh-100" style="background-color: #0856a1">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div class="card shadow-2-strong" style="border-radius: 1rem">
-          <div class="card-body p-5">
-            <div class="text-center">
-              <img class="p-4" src="/assets/images/logo_rgb.svg" alt="Logo" />
-            </div>
-            <form
-              class="needs-validation"
-              #userRegistrationForm="ngForm"
-              autocomplete="off"
-              (submit)="onSubmit(userRegistrationForm)"
-              novalidate
-            >
-              <div class="form-floating mb-3">
-                <input
-                  #Email="ngModel"
-                  name="Email"
-                  [(ngModel)]="account.email"
-                  type="email"
-                  class="form-control"
-                  id="floatingInput"
-                  placeholder="name@example.com"
-                  required
-                />
-                <label for="floatingInput">El.paštas</label>
-                <div class="invalid-feedback">Iveskite</div>
-              </div>
-              <div class="form-floating mb-3">
-                <input
-                  type="password"
-                  class="form-control"
-                  #Password="ngModel"
-                  name="Password"
-                  [(ngModel)]="account.password"
-                  id="floatingPassword"
-                  placeholder="Password"
-                  required
-                />
-                <label data-error="Privalomas laukas!" for="floatingPassword"
-                  >Slaptažodis</label
-                >
-              </div>
-
-              <div class="form-floating">
-                <input
-                  type="password"
-                  class="form-control"
-                  #Password="ngModel"
-                  name="Password"
-                  [(ngModel)]="account.confirmPassword"
-                  id="floatingPassword"
-                  placeholder="Password"
-                  required
-                />
-                <label data-error="Privalomas laukas!" for="floatingPassword"
-                  >Patvirtinti slaptažodi</label
-                >
-              </div>
-
-              <div class="d-grid gap-2 mt-3">
-                <button
-                  [disabled]="!userRegistrationForm.valid"
-                  class="btn btn-primary pt-2 pb-2"
-                  type="submit"
-                >
-                  Registruoti
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+<div class="col-12 col-md-8 col-lg-6 col-xl-5">
+  <div class="card shadow-2-strong" style="border-radius: 1rem">
+    <div class="card-body p-5">
+      <div class="text-center">
+        <img class="p-4" src="/assets/images/logo_rgb.svg" alt="Logo" />
       </div>
+      <form
+        class="needs-validation"
+        #userRegistrationForm="ngForm"
+        autocomplete="off"
+        (submit)="onSubmit(userRegistrationForm)"
+        novalidate
+      >
+        <div class="form-floating mb-3">
+          <input
+            #Email="ngModel"
+            name="Email"
+            [(ngModel)]="account.email"
+            type="email"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+            required
+          />
+          <label for="floatingInput">El.paštas</label>
+          <div class="invalid-feedback">Iveskite</div>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            class="form-control"
+            #Password="ngModel"
+            name="Password"
+            [(ngModel)]="account.password"
+            id="floatingPassword"
+            placeholder="Password"
+            required
+          />
+          <label data-error="Privalomas laukas!" for="floatingPassword"
+            >Slaptažodis</label
+          >
+        </div>
+
+        <div class="form-floating">
+          <input
+            type="password"
+            class="form-control"
+            #Password="ngModel"
+            name="Password"
+            [(ngModel)]="account.confirmPassword"
+            id="floatingPassword"
+            placeholder="Password"
+            required
+          />
+          <label data-error="Privalomas laukas!" for="floatingPassword"
+            >Patvirtinti slaptažodi</label
+          >
+        </div>
+
+        <div class="d-grid gap-2 mt-3">
+          <button
+            [disabled]="!userRegistrationForm.valid"
+            class="btn btn-primary pt-2 pb-2"
+            type="submit"
+          >
+            Registruoti
+          </button>
+        </div>
+      </form>
     </div>
   </div>
-</section>
-<br />
-<br />
-<p>Works sign up!</p>
+</div>

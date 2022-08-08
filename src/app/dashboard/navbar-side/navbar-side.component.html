@@ -15,51 +15,39 @@
     ></button>
   </div>
   <ul class="sidenav-nav list-unstyled">
-    <li class="sidenav-nav-item" *ngFor="let data of navData">
-      <a class="sidenav-nav-link" [routerLink]="data.routeLink">
-        <i class="sidenav-link-icon"><span [class]="data.icon">person</span></i>
+    <li class="sidenav-nav-item">
+      <a
+        class="sidenav-nav-link"
+        [routerLink]="['profile']"
+        routerLinkActive="active"
+      >
+        <i class="sidenav-link-icon"
+          ><span class="material-icons-sharp">person</span></i
+        >
         <span class="sidenav-link-text" *ngIf="collapsed">{{ email }}</span>
-      </a>
-    </li>
-    <li class="sidenav-nav-item" *ngFor="let data of navData">
-      <a class="sidenav-nav-link" [routerLink]="data.routeLink">
-        <i class="sidenav-link-icon"
-          ><span [class]="data.icon">{{ data.label }}</span></i
-        >
-        <span class="sidenav-link-text" *ngIf="collapsed">Kandidatai</span>
-      </a>
-    </li>
-    <li class="sidenav-nav-item" *ngFor="let data of navData">
-      <a class="sidenav-nav-link" [routerLink]="data.routeLink">
-        <i class="sidenav-link-icon"
-          ><span [class]="data.icon">calendar_month</span></i
-        >
-        <span class="sidenav-link-text" *ngIf="collapsed">Kalendorius</span>
-      </a>
-    </li>
-    <li class="sidenav-nav-item" *ngFor="let data of navData">
-      <a class="sidenav-nav-link" [routerLink]="data.routeLink">
-        <i class="sidenav-link-icon"
-          ><span [class]="data.icon">publish</span></i
-        >
-        <span class="sidenav-link-text" *ngIf="collapsed">Importinimas</span>
-      </a>
-    </li>
-    <li class="sidenav-nav-item" *ngFor="let data of navData">
-      <a class="sidenav-nav-link" [routerLink]="data.routeLink">
-        <i class="sidenav-link-icon"
-          ><span [class]="data.icon">settings</span></i
-        >
-        <span class="sidenav-link-text" *ngIf="collapsed">Nustatymai</span>
       </a>
     </li>
     <li class="sidenav-nav-item" *ngFor="let data of navData">
       <a
         class="sidenav-nav-link"
-        [routerLink]="data.routeLink"
-        (click)="onLogout()"
+        [routerLink]="[data.routeLink]"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
       >
-        <i class="sidenav-link-icon"><span [class]="data.icon">logout</span></i>
+        <i class="sidenav-link-icon"
+          ><span class="material-icons-sharp">{{ data.label }}</span></i
+        >
+        <span class="sidenav-link-text" *ngIf="collapsed">{{
+          data.title
+        }}</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item">
+      <a class="sidenav-nav-link" (click)="onLogout()">
+        <i class="sidenav-link-icon"
+          ><span class="material-icons-sharp">logout</span></i
+        >
         <span class="sidenav-link-text" *ngIf="collapsed">Atsijungti</span>
       </a>
     </li>
