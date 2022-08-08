@@ -20,8 +20,8 @@ export class AccountLoginService {
   getUserProfile() {
     var token = JSON.stringify(localStorage.getItem('token'));
     console.log(this.jwtHelper.decodeToken(token));
-    const email = this.jwtHelper.decodeToken(token);
-    const emaili = email['Email'];
-    return emaili;
+    const tokendec = this.jwtHelper.decodeToken(token);
+    const email = tokendec['Email'];
+    return email;
   }
 }
