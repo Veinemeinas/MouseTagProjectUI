@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CandidateTableApiService } from '../services/candidate-table-api.service';
-import { PrimeNGConfig, SelectItemGroup, SelectItem } from 'primeng/api';
-import { ToastInjector } from 'ngx-toastr';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { SelectItem } from 'primeng/api';
+
+import { FormGroup } from '@angular/forms';
 import { Candidate } from '../models/candidate.model';
 import { NgForm } from '@angular/forms';
 
@@ -30,15 +30,9 @@ export class AddEditCandidateComponent implements OnInit {
 
   selectedTechnologies: SelectItem[];
 
-  constructor(
-    private service: CandidateTableApiService,
-    private primengConfig: PrimeNGConfig,
-    private formBuilder: FormBuilder
-  ) {}
+  constructor(private service: CandidateTableApiService) {}
 
   ngOnInit(): void {
-    this.primengConfig.ripple = true;
-
     this.service.getTechnologiesList().subscribe((response: any[]) => {
       console.log(response);
       this.technologyOptions = response.map((x) => {
@@ -49,14 +43,14 @@ export class AddEditCandidateComponent implements OnInit {
     this.resetForm();
   }
 
-  resetForm(userRegistrationForm?: NgForm) {
-    if (userRegistrationForm != null) userRegistrationForm.reset();
+  resetForm(AddCandidateForm?: NgForm) {
+    if (AddCandidateForm != null) AddCandidateForm.reset();
     this.candidate = {
       whenWasContacted: [''],
       name: '',
       surname: '',
-      linkedIn: '',
-      comments: '',
+      linkedin: '',
+      comment: '',
       available: true,
       technologyIds: [],
       willBeContacted: '',
