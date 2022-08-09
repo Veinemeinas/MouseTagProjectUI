@@ -1,68 +1,116 @@
 <form
-  #addCandidateForm="ngForm"
+  #AddCandidateForm="ngForm"
   autocomplete="off"
-  (submit)="AddCandidate(addCandidateForm)"
+  (submit)="AddCandidate(AddCandidateForm)"
   novalidate
 >
-  <div class="mb-3">
-    <div class="mb-3">
+  <div class="row mb-3">
+    <div class="col">
       <div class="p-field">
-        <label for="date1">Icon</label>
+        <label class="mb-1" for="name">Vardas</label>
+        <input
+          id="name"
+          [(ngModel)]="candidate.name"
+          name="name"
+          type="name"
+          pInputText
+        />
+      </div>
+    </div>
+    <div class="col">
+      <div class="p-field">
+        <label class="mb-1" for="surname">Pavardė</label>
+        <input
+          id="surname"
+          [(ngModel)]="candidate.surname"
+          name="surname"
+          type="surname"
+          pInputText
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <div class="p-field">
+        <label class="mb-1" for="linkedIn">LinkedIn Url</label>
+        <input
+          id="linkedIn"
+          [(ngModel)]="candidate.linkedIn"
+          name="linkedIn"
+          type="linkedIn"
+          pInputText
+        />
+      </div>
+    </div>
+    <div class="col">
+      <label class="mb-2" for="available">Ar atviras pasiūlymui?</label>
+      <p-toggleButton
+        [(ngModel)]="candidate.available"
+        name="available"
+        onIcon="pi pi-check"
+        offIcon="pi pi-times"
+      ></p-toggleButton>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <label class="mb-1" for="username1">Technologijos</label>
+      <div class="p-field" style="width: 442px">
+        <p-multiSelect
+          [(ngModel)]="candidate.technologyIds"
+          name="technologyIds"
+          [options]="technologyOptions"
+          [style]="{ width: '100%' }"
+          [panelStyle]="{ width: '100%' }"
+        ></p-multiSelect>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <div class="p-field">
+        <label class="mb-1" for="date1">Kada susiekta?</label>
         <p-calendar
-          [(ngModel)]="contactedDate"
+          [(ngModel)]="candidate.whenWasContacted"
+          name="whenWasContacted"
           [showIcon]="true"
           inputId="icon"
           [ngModelOptions]="{ standalone: true }"
         ></p-calendar>
       </div>
     </div>
-    <div class="mb-3">
+    <div class="col">
       <div class="p-field">
-        <label for="date1">Icon</label>
+        <label class="mb-1" for="date1">Planuojamas susitikimas</label>
         <p-calendar
-          [(ngModel)]="meetDate"
+          [(ngModel)]="candidate.willBeContacted"
+          name="willBeContacted"
           [showIcon]="true"
           inputId="icon"
         ></p-calendar>
       </div>
     </div>
-
-    <div class="mb-3">
-      <div class="p-field">
-        <label for="username1">Vardas</label>
-        <input id="username1" type="username" pInputText />
-      </div>
-      <div class="p-field">
-        <label for="username1">Pavardė</label>
-        <input id="username1" type="username" pInputText />
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <div class="p-field">
-        <label for="username1">LinkedIn Url</label>
-        <input id="username1" type="username" pInputText />
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <div class="p-field">
-        <label for="username1">Komentaras</label>
-        <textarea rows="5" cols="30" pInputTextarea></textarea>
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <p-toggleButton
-        onIcon="pi pi-check"
-        offIcon="pi pi-times"
-      ></p-toggleButton>
-    </div>
-
-    <span class="p-float-label">
-      <p-multiSelect [options]="technologyOptions"></p-multiSelect>
-      <label for="multiselect">MultiSelect</label>
-    </span>
   </div>
-  <button type="submit" class="btn btn-primary">Prideti</button>
+  <div class="row mb-3">
+    <div class="col ms-auto">
+      <div class="p-field" style="width: 442px; min-height: 200px">
+        <label class="mb-1" for="username1">Komentaras</label>
+        <textarea
+          pInputTextarea
+          [(ngModel)]="candidate.comments"
+          name="comments"
+          [style]="{ width: '100%', height: '200px' }"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <button class="btn btn-primary pt-2 pb-2" type="submit">
+        Pridėti naują vartotoją
+      </button>
+    </div>
+  </div>
 </form>

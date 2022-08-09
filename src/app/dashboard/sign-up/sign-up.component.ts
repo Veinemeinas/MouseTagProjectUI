@@ -21,6 +21,7 @@ export class SignUpComponent implements OnInit {
     if (userRegistrationForm != null) userRegistrationForm.reset();
     this.account = {
       email: '',
+      role: '',
       password: '',
       confirmPassword: '',
     };

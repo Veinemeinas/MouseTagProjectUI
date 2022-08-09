@@ -10,6 +10,16 @@ export class CandidateTableApiService {
 
   constructor(private http: HttpClient) {}
 
+  addCan(data: any) {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let options = { headers: headers };
+    return this.http.post(
+      this.candidateTableAPIUrl + '/Candidates',
+      data,
+      options
+    );
+  }
+
   // Candidates CRUD
   getCandidatesList(): Observable<any[]> {
     return this.http.get<any>(this.candidateTableAPIUrl + '/Candidates');

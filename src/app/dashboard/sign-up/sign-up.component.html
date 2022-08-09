@@ -23,8 +23,19 @@
             required
           />
           <label for="floatingInput">El.paštas</label>
-          <div class="invalid-feedback">Iveskite</div>
         </div>
+        <div class="form-floating mb-3">
+          <select
+            [(ngModel)]="account.role"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option value="Admin">Admin</option>
+            <option value="User" selected>User</option>
+          </select>
+          <label for="floatingInput">Rolė</label>
+        </div>
+
         <div class="form-floating mb-3">
           <input
             type="password"
@@ -63,7 +74,7 @@
             class="btn btn-primary pt-2 pb-2"
             type="submit"
           >
-            Registruoti
+            Pridėti naują vartotoją
           </button>
         </div>
       </form>

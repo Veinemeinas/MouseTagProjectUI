@@ -45,13 +45,30 @@ export class AddEditCandidateComponent implements OnInit {
         return { value: x.id, label: x.technologyName };
       });
     });
+
+    this.resetForm();
   }
 
-  AddCandidate(addCandidateForm: NgForm) {
+  resetForm(userRegistrationForm?: NgForm) {
+    if (userRegistrationForm != null) userRegistrationForm.reset();
+    this.candidate = {
+      whenWasContacted: [''],
+      name: '',
+      surname: '',
+      linkedIn: '',
+      comments: '',
+      available: true,
+      technologyIds: [],
+      willBeContacted: '',
+    };
+  }
+
+  AddCandidate(AddCandidateForm: NgForm) {
     console.log(this.candidate);
-    // this.service.SignUpUser(this.account).subscribe((data: any) => {
-    //   if (data.Succeded == true) {
-    //     this.resetForm(addCandidateForm);
-    //   }
+    this.service.addCan(this.candidate).subscribe((data: any) => {
+      if (data.Succeded == true) {
+        this.resetForm(AddCandidateForm);
+      }
+    });
   }
 }
