@@ -31,6 +31,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { CalendarModule } from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { CalendarComponentComponent } from './calendar-page/calendar-component/calendar-component.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     CalendarPageComponent,
     ImportPageComponent,
     SettingsPageComponent,
+    CalendarComponentComponent,
   ],
   imports: [
     CommonModule,
