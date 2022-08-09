@@ -61,6 +61,8 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     CalendarModule,
     BrowserAnimationsModule,
     ToggleButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [AccountService, CandidateTableApiService],
   bootstrap: [AppComponentt],

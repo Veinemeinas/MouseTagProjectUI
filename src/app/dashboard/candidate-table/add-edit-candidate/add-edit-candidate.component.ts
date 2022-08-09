@@ -1,48 +1,57 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CandidateTableApiService } from '../services/candidate-table-api.service';
-import { PrimeNGConfig, SelectItemGroup } from 'primeng/api';
+import { PrimeNGConfig, SelectItemGroup, SelectItem } from 'primeng/api';
+import { ToastInjector } from 'ngx-toastr';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Candidate } from '../models/candidate.model';
+import { NgForm } from '@angular/forms';
 
-interface City {
-  name: string;
-  code: string;
-}
-
-interface Country {
-  name: string;
-  code: string;
-}
 @Component({
   selector: 'app-add-edit-candidate',
   templateUrl: './add-edit-candidate.component.html',
   styleUrls: ['./add-edit-candidate.component.css'],
 })
 export class AddEditCandidateComponent implements OnInit {
+  candidate: Candidate;
+
+  candidateForm!: FormGroup;
+
   checked: boolean = true;
 
-  date1: Date;
+  contactedDate: Date;
 
-  date2: Date;
+  meetDate: Date;
 
   candidateList$: Observable<any[]>;
   technologyList$: Observable<any[]>;
 
-  cities: City[];
+  technologyOptions: SelectItem<number>[];
 
-  countries: any[];
-
-  //selectedCity:;
-
-  selectedCountries: any[];
+  selectedTechnologies: SelectItem[];
 
   constructor(
     private service: CandidateTableApiService,
-    private primengConfig: PrimeNGConfig
+    private primengConfig: PrimeNGConfig,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
 
-    this.technologyList$ = this.service.getTechnologiesList();
+    this.service.getTechnologiesList().subscribe((response: any[]) => {
+      console.log(response);
+      this.technologyOptions = response.map((x) => {
+        return { value: x.id, label: x.technologyName };
+      });
+    });
+  }
+
+  AddCandidate(addCandidateForm: NgForm) {
+    console.log(this.candidate);
+    // this.service.SignUpUser(this.account).subscribe((data: any) => {
+    //   if (data.Succeded == true) {
+    //     this.resetForm(addCandidateForm);
+    //   }
   }
 }
