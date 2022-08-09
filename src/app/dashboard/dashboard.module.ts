@@ -24,6 +24,14 @@ import { CalendarPageComponent } from './calendar-page/calendar-page.component';
 import { ImportPageComponent } from './import-page/import-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 
+import { ListboxModule } from 'primeng/listbox';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { CalendarModule } from 'primeng/calendar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+
 @NgModule({
   declarations: [
     SignUpComponent,
@@ -46,6 +54,13 @@ import { SettingsPageComponent } from './settings-page/settings-page.component';
     RouterModule,
     DashboardRoutingModule,
     FormsModule,
+    ListboxModule,
+    InputTextModule,
+    InputTextareaModule,
+    MultiSelectModule,
+    CalendarModule,
+    BrowserAnimationsModule,
+    ToggleButtonModule,
   ],
   providers: [AccountService, CandidateTableApiService],
   bootstrap: [AppComponentt],

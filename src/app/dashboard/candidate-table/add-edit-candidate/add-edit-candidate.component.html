@@ -1,10 +1,95 @@
-<form>
+<!-- <form>
     <div class="mb-3">
         <label for="name" class="form-label">Technologija</label>
-        <!-- <input type="text" class="form-control" name="technology" [(ngModel)]="technology" *ngIf=
-        "candidate.technologies"> -->
+        <input type="text" class="form-control" name="technology" [(ngModel)]="technology" *ngIf=
+        "candidate.technologies">
         <select class="form-control" name="technology" id="technology">
             <option *ngFor="let technology of technologyList$|async" value="technology.id">{{technology.technologyName}}</option>
         </select>
     </div>
+</form> -->
+<form>
+  <div class="mb-3">
+    <div class="mb-3">
+      <div class="p-field">
+        <label for="date1">Icon</label>
+        <p-calendar
+          [(ngModel)]="date1"
+          [showIcon]="true"
+          inputId="icon"
+          [ngModelOptions]="{ standalone: true }"
+        ></p-calendar>
+      </div>
+    </div>
+    <div class="mb-3">
+      <div class="p-field">
+        <label for="date1">Icon</label>
+        <p-calendar
+          [(ngModel)]="date2"
+          [showIcon]="true"
+          inputId="icon"
+          [ngModelOptions]="{ standalone: true }"
+        ></p-calendar>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div class="p-field">
+        <label for="username1">Vardas</label>
+        <input id="username1" type="username" pInputText />
+      </div>
+      <div class="p-field">
+        <label for="username1">Pavardė</label>
+        <input id="username1" type="username" pInputText />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div class="p-field">
+        <label for="username1">LinkedIn Url</label>
+        <input id="username1" type="username" pInputText />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div class="p-field">
+        <label for="username1">Komentaras</label>
+        <textarea rows="5" cols="30" pInputTextarea></textarea>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <p-toggleButton
+        onIcon="pi pi-check"
+        offIcon="pi pi-times"
+        [(ngModel)]="checked"
+        [ngModelOptions]="{ standalone: true }"
+      ></p-toggleButton>
+    </div>
+
+    <span class="p-float-label">
+      <p-multiSelect inputId="multiselect" optionLabel="name"></p-multiSelect>
+      <label for="multiselect">MultiSelect</label>
+    </span>
+
+    <!-- <p-listbox
+      [(ngModel)]="selectedCountries"
+      [metaKeySelection]="false"
+      [checkbox]="true"
+      [filter]="true"
+      [multiple]="true"
+      optionLabel="tech"
+      [listStyle]="{ 'max-height': '250px' }"
+      [style]="{ width: '15rem' }"
+    >
+      <ng-template let-country pTemplate="item">
+        <div class="country-item">
+          <div ngFor*="let technology of technologyList$|async">
+            {{ technology.technologyName }}
+          </div>
+        </div>
+      </ng-template>
+    </p-listbox> -->
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
