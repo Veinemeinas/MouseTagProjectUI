@@ -32,14 +32,13 @@ import { CalendarModule } from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { CalendarComponentComponent } from './calendar-page/calendar-component/calendar-component.component';
-
+import { AddEditDeleteTechnologyComponent } from './candidate-table/add-edit-delete-technology/add-edit-delete-technology.component';
+import {RippleModule} from 'primeng/ripple';
+import {MessageService} from 'primeng/api';
 import { CustomerService } from './candidate-table/show-candidate/customerservice';
-
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
-
 import { SliderModule } from 'primeng/slider';
-
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
@@ -63,6 +62,7 @@ import { FileUplComponent } from './import-page/file-upl/file-upl.component';
     ImportPageComponent,
     SettingsPageComponent,
     CalendarComponentComponent,
+    AddEditDeleteTechnologyComponent,
     FileUplComponent,
   ],
   imports: [
@@ -80,6 +80,7 @@ import { FileUplComponent } from './import-page/file-upl/file-upl.component';
     ToggleButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    RippleModule,
     TableModule,
     ToastModule,
     SliderModule,
@@ -89,7 +90,7 @@ import { FileUplComponent } from './import-page/file-upl/file-upl.component';
     DropdownModule,
     ProgressBarModule,
   ],
-  providers: [AccountService, CandidateTableApiService, CustomerService],
+  providers: [AccountService, CandidateTableApiService, MessageService, CustomerService],
   bootstrap: [AppComponentt],
 })
 export class DashboardModule {}

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, NEVER, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,18 +18,22 @@ export class CandidateTableApiService {
       this.candidateTableAPIUrl + '/Candidates',
       data,
       options
-    );
+    ).pipe(catchError(error => {
+      return NEVER;
+    }));
   }
 
   addTech(data: any) {
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
     let res = new HttpHeaders({ observe: 'response' });
     let options = { headers: headers };
     return this.http.post(
       this.candidateTableAPIUrl + '/Technology',
       data,
-      options
-    );
+      options,
+    ).pipe(catchError(error => {
+      return NEVER;
+    }));
   }
 
   // Candidates CRUD

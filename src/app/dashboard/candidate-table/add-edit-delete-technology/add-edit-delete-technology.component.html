@@ -1,0 +1,42 @@
+<form
+  #AddTechnologyForm="ngForm"
+  autocomplete="off"
+  (submit)="AddTechnology(AddTechnologyForm)"
+  novalidate
+>
+<div class="row mb-3">
+    <div class="col">
+      <label class="mb-1" for="username1">Technologijos</label>
+      <div class="p-field" style="width: 442px">
+        <p-multiSelect
+          name="technologyIds"
+          [options]="technologyOptions"
+          [style]="{ width: '100%' }"
+          [panelStyle]="{ width: '100%' }"
+        ></p-multiSelect>
+      </div>
+    </div>
+  </div>
+    <div class="col">
+      <div class="p-field">
+        <label class="mb-1" for="surname">Norima pridėti technologija</label>
+        <input
+          id="technology"
+          [(ngModel)]="technology.technologyName"
+          name="technology"
+          type="technology"
+          pInputText
+        />
+      </div>
+    </div>
+    <small id="username2-help" class="p-error block" *ngIf="foundIt">Tokia technologija jau egzistuoja!</small>
+    <small id="username2-help" class="p-error block" *ngIf="empty">Įveskite norimą technologiją!</small>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <button class="btn btn-primary pt-2 pb-2" type="submit">
+        Pridėti Technologiją
+      </button>
+    </div>
+  </div>
+
