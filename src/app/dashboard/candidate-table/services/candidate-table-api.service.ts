@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, NEVER, Observable } from 'rxjs';
+import { Candidate } from '../models/candidate.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,33 +13,36 @@ export class CandidateTableApiService {
 
   addCan(data: any) {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    let res = new HttpHeaders({ observe: 'response' });
     let options = { headers: headers };
-    return this.http.post(
-      this.candidateTableAPIUrl + '/Candidates',
-      data,
-      options
-    ).pipe(catchError(error => {
-      return NEVER;
-    }));
+    return this.http
+      .post(this.candidateTableAPIUrl + '/Candidates', data, options)
+      .pipe(
+        catchError((error) => {
+          return NEVER;
+        })
+      );
   }
 
   addTech(data: any) {
-    let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
-    let res = new HttpHeaders({ observe: 'response' });
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     let options = { headers: headers };
-    return this.http.post(
-      this.candidateTableAPIUrl + '/Technology',
-      data,
-      options,
-    ).pipe(catchError(error => {
-      return NEVER;
-    }));
+    return this.http
+      .post(this.candidateTableAPIUrl + '/Technology', data, options)
+      .pipe(
+        catchError((error) => {
+          return NEVER;
+        })
+      );
   }
 
   // Candidates CRUD
-  getCandidatesList(): Observable<any[]> {
-    return this.http.get<any>(this.candidateTableAPIUrl + '/Candidates');
+  getCandidatesList() {
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let options = { headers: headers };
+    return this.http.get<Candidate[]>(
+      this.candidateTableAPIUrl + '/Candidates',
+      options
+    );
   }
 
   addCandidate(data: any) {

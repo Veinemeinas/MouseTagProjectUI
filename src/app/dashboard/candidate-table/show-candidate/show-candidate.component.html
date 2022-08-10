@@ -1,6 +1,6 @@
 <p-table
   #dt2
-  [value]="customers"
+  [value]="candidates"
   dataKey="id"
   [rows]="10"
   [showCurrentPageReport]="true"
@@ -9,39 +9,22 @@
   styleClass="p-datatable-customers"
   [paginator]="true"
   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-  [globalFilterFields]="[
-    'name',
-    'country.name',
-    'representative.name',
-    'status'
-  ]"
+  [globalFilterFields]="['name', 'surname']"
 >
-  <ng-template pTemplate="caption">
-    <div class="p-d-flex">
-      <span class="p-input-icon-left p-ml-auto">
-        <i class="pi pi-search"></i>
-        <input pInputText type="text" placeholder="Search keyword" />
-      </span>
-    </div>
-  </ng-template>
   <ng-template pTemplate="header">
     <tr>
-      <th>Kada buvo susisiekta</th>
-      <th>Vardas</th>
-      <th>Pavardė</th>
-      <th>LinkedIn nuoroda</th>
-      <th>Komentaras</th>
-      <th>Technologijos</th>
-      <th>Kada reikia susisiekti</th>
-      <th style="width: 6rem">Ar atviras pasiūlymams</th>
-    </tr>
-    <tr>
       <th>
-        <p-columnFilter type="text" field="name"></p-columnFilter>
+        <div class="p-d-flex">
+          <span class="p-input-icon-left p-ml-auto">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" placeholder="Search keyword" />
+          </span>
+        </div>
       </th>
-      <th>
-        <p-columnFilter type="text" field="country.name"></p-columnFilter>
-      </th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
       <th>
         <p-columnFilter
           field="representative"
@@ -51,7 +34,6 @@
           <ng-template pTemplate="filter" let-value let-filter="filterCallback">
             <p-multiSelect
               [ngModel]="value"
-              [options]="representatives"
               placeholder="Any"
               (onChange)="filter($event.value)"
               optionLabel="name"
@@ -65,52 +47,51 @@
           </ng-template>
         </p-columnFilter>
       </th>
-      <th>
-        <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
-          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-            <p-dropdown
-              [ngModel]="value"
-              [options]="statuses"
-              (onChange)="filter($event.value)"
-              placeholder="Any"
-              [showClear]="true"
-            >
-              <ng-template let-option pTemplate="item">
-                <span [class]="'customer-badge status-' + option.value">{{
-                  option.label
-                }}</span>
-              </ng-template>
-            </p-dropdown>
-          </ng-template>
-        </p-columnFilter>
-      </th>
+      <th></th>
       <th>
         <p-columnFilter type="boolean" field="verified"></p-columnFilter>
       </th>
     </tr>
+    <tr>
+      <th>Kada buvo susisiekta</th>
+      <th>Vardas</th>
+      <th>Pavardė</th>
+      <th>LinkedIn nuoroda</th>
+      <th>Komentaras</th>
+      <th>Technologijos</th>
+      <th>Kada reikia susisiekti</th>
+      <th>Ar atviras pasiūlymams</th>
+    </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-customer>
+  <ng-template pTemplate="body" let-candidate>
     <tr>
       <td>
-        {{ customer.name }}
+        {{ candidate.whenWasContacted[0] | date: "yyyy/MM/dd" }}
       </td>
       <td>
-        <span class="image-text">{{ customer.country.name }}</span>
+        <span>{{ candidate.name }}</span>
       </td>
       <td>
-        <span class="image-text">{{ customer.representative.name }}</span>
+        <span>{{ candidate.surname }}</span>
       </td>
       <td>
-        <span [class]="'customer-badge status-' + customer.status">{{
-          customer.status
-        }}</span>
+        <span>{{ candidate.linkedin }}</span>
+      </td>
+      <td>
+        <span>{{ candidate.comment }}</span>
+      </td>
+      <td>
+        <span>{{ candidate.technologyIds }}</span>
+      </td>
+      <td>
+        <span>{{ candidate.willBeContacted | date: "yyyy/MM/dd" }}</span>
       </td>
       <td>
         <i
           class="pi"
           [ngClass]="{
-            'true-icon pi-check-circle': customer.verified,
-            'false-icon pi-times-circle': !customer.verified
+            'true-icon pi-check-circle': candidate.available,
+            'false-icon pi-times-circle': !candidate.available
           }"
         ></i>
       </td>
@@ -122,35 +103,6 @@
     </tr>
   </ng-template>
 </p-table>
-
-<table class="table table-striped">
-  <thead>
-    <th>Kada buvo susisiekta</th>
-    <th>Vardas</th>
-    <th>Pavardė</th>
-    <th>LinkedIn nuoroda</th>
-    <th>Komentaras</th>
-    <th>Technologijos</th>
-    <th>Ar atviras pasiūlymams</th>
-    <th>Kada reikia susisiekti</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of candidateList$ | async">
-      <td>{{ item.whenWasContacted[0].date | date: "yyyy/MM/dd" }}</td>
-      <td>{{ item.name }}</td>
-      <td>{{ item.surname }}</td>
-      <td>{{ item.linkedin }}</td>
-      <td>{{ item.comment }}</td>
-      <td>
-        <span *ngFor="let technology of item.technologies"
-          >{{ technology.technologyName }},&nbsp;</span
-        >
-      </td>
-      <td>{{ item.available }}</td>
-      <td>{{ item.willBeContacted | date: "yyyy/MM/dd" }}</td>
-    </tr>
-  </tbody>
-</table>
 
 <!-- Button trigger modal -->
 <button
