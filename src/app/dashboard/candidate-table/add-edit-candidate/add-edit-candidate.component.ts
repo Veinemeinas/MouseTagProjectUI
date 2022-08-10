@@ -46,7 +46,7 @@ export class AddEditCandidateComponent implements OnInit {
   resetForm(AddCandidateForm?: NgForm) {
     if (AddCandidateForm != null) AddCandidateForm.reset();
     this.candidate = {
-      whenWasContacted: [''],
+      whenWasContacted: [],
       name: '',
       surname: '',
       linkedin: '',
