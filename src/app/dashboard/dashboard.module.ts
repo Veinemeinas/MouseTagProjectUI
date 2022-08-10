@@ -33,6 +33,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { CalendarComponentComponent } from './calendar-page/calendar-component/calendar-component.component';
 
+import { CustomerService } from './candidate-table/show-candidate/customerservice';
+
+import { TableModule } from 'primeng/table';
+import { ToastModule } from 'primeng/toast';
+
+import { SliderModule } from 'primeng/slider';
+
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { FileUplComponent } from './import-page/file-upl/file-upl.component';
+
 @NgModule({
   declarations: [
     SignUpComponent,
@@ -49,6 +63,7 @@ import { CalendarComponentComponent } from './calendar-page/calendar-component/c
     ImportPageComponent,
     SettingsPageComponent,
     CalendarComponentComponent,
+    FileUplComponent,
   ],
   imports: [
     CommonModule,
@@ -65,8 +80,16 @@ import { CalendarComponentComponent } from './calendar-page/calendar-component/c
     ToggleButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    TableModule,
+    ToastModule,
+    SliderModule,
+    ContextMenuModule,
+    DialogModule,
+    ButtonModule,
+    DropdownModule,
+    ProgressBarModule,
   ],
-  providers: [AccountService, CandidateTableApiService],
+  providers: [AccountService, CandidateTableApiService, CustomerService],
   bootstrap: [AppComponentt],
 })
 export class DashboardModule {}
