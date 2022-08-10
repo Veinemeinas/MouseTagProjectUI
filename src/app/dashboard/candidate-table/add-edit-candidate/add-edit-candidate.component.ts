@@ -58,11 +58,11 @@ export class AddEditCandidateComponent implements OnInit {
   }
 
   AddCandidate(AddCandidateForm: NgForm) {
-    console.log(this.candidate);
-    this.service.addCan(this.candidate).subscribe((data: any) => {
-      if (data.Succeded == true) {
-        this.resetForm(AddCandidateForm);
-      }
+    this.service.addCan(this.candidate).subscribe((response: any) => {
+      console.log(response);
+      // if (response.status == 200) {
+      //   this.resetForm(AddCandidateForm);
+      // }
     });
   }
 }

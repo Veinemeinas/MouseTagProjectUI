@@ -12,6 +12,7 @@ export class CandidateTableApiService {
 
   addCan(data: any) {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let res = new HttpHeaders({ observe: 'response' });
     let options = { headers: headers };
     return this.http.post(
       this.candidateTableAPIUrl + '/Candidates',
