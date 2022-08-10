@@ -17,7 +17,7 @@
         <div class="p-d-flex">
           <span class="p-input-icon-left p-ml-auto">
             <i class="pi pi-search"></i>
-            <input pInputText type="text" placeholder="Search keyword" />
+            <input pInputText type="text" placeholder="Ieškoti" />
           </span>
         </div>
       </th>
@@ -34,13 +34,14 @@
           <ng-template pTemplate="filter" let-value let-filter="filterCallback">
             <p-multiSelect
               [ngModel]="value"
-              placeholder="Any"
+              [options]="technologyOptions"
+              placeholder="Pasirinkti"
               (onChange)="filter($event.value)"
-              optionLabel="name"
+              optionLabel="technologyIds"
             >
-              <ng-template let-option pTemplate="item">
+              <ng-template let-technologies pTemplate="item">
                 <div class="p-multiselect-representative-option">
-                  <span class="p-ml-1">{{ option.name }}</span>
+                  <span class="p-ml-1">{{ technologies.technologyName }}</span>
                 </div>
               </ng-template>
             </p-multiSelect>
@@ -81,7 +82,9 @@
         <span>{{ candidate.comment }}</span>
       </td>
       <td>
-        <span>{{ candidate.technologyIds }}</span>
+        <span *ngFor="let technology of candidate.technologies"
+          >{{ technology.technologyName }},&nbsp;</span
+        >
       </td>
       <td>
         <span>{{ candidate.willBeContacted | date: "yyyy/MM/dd" }}</span>

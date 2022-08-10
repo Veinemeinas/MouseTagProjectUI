@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CandidateTableApiService } from '../services/candidate-table-api.service';
 import { Candidate } from '../models/candidate.model';
+import { SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'app-show-candidate',
@@ -11,12 +12,18 @@ import { Candidate } from '../models/candidate.model';
 export class ShowCandidateComponent implements OnInit {
   candidates: Candidate[];
 
+  totalRecords: number;
+
   candidate: Candidate;
 
   loading: boolean = true;
 
   //candidateList$: Observable<any[]>;
   technologyList$: Observable<any[]>;
+
+  selectAll: boolean = false;
+
+  technologyOptions: SelectItem<number>[];
 
   // Map to display data associate with foreign keys
   technologyMap: Map<number, string> = new Map();
@@ -30,8 +37,15 @@ export class ShowCandidateComponent implements OnInit {
       console.log(data);
       this.candidates = data;
       this.candidates.forEach((candidate) => candidate.whenWasContacted);
-
+      //this.totalRecords = res.totalRecords;
       this.loading = false;
+    });
+
+    this.service.getTechnologiesList().subscribe((response: any[]) => {
+      console.log(response);
+      this.technologyOptions = response.map((x) => {
+        return { value: x.id, label: x.technologyName };
+      });
     });
 
     // Variables
@@ -43,4 +57,26 @@ export class ShowCandidateComponent implements OnInit {
     //    this.candidate = {};
     // }
   }
+
+  onSelectionChange(value = []) {
+    this.selectAll = value.length === this.totalRecords;
+    this.technologyOptions = value;
+  }
+
+  // onSelectAllChange(event) {
+  //   const checked = event.checked;
+
+  //   if (checked) {
+  //     this.service.getCandidatesList().subscribe((data) => {
+  //       console.log(data);
+  //       this.candidates = data;
+  //       this.candidates.forEach((candidate) => candidate.whenWasContacted);
+  //       this.selectAll = true;
+  //       this.loading = false;
+  //     });
+  //   } else {
+  //     this.technologyOptions = [];
+  //     this.selectAll = false;
+  //   }
+  // }
 }

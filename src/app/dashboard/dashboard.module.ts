@@ -33,8 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { CalendarComponentComponent } from './calendar-page/calendar-component/calendar-component.component';
 import { AddEditDeleteTechnologyComponent } from './candidate-table/add-edit-delete-technology/add-edit-delete-technology.component';
-import {RippleModule} from 'primeng/ripple';
-import {MessageService} from 'primeng/api';
+import { RippleModule } from 'primeng/ripple';
+import { MessageService } from 'primeng/api';
 import { CustomerService } from './candidate-table/show-candidate/customerservice';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
@@ -90,7 +90,12 @@ import { FileUplComponent } from './import-page/file-upl/file-upl.component';
     DropdownModule,
     ProgressBarModule,
   ],
-  providers: [AccountService, CandidateTableApiService, MessageService, CustomerService],
+  providers: [
+    AccountService,
+    CandidateTableApiService,
+    MessageService,
+    CustomerService,
+  ],
   bootstrap: [AppComponentt],
 })
 export class DashboardModule {}
