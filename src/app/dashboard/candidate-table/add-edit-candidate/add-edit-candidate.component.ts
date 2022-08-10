@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CandidateTableApiService } from '../services/candidate-table-api.service';
-import { SelectItem } from 'primeng/api';
+import { SelectItem, MessageService } from 'primeng/api';
 
 import { FormGroup } from '@angular/forms';
 import { Candidate } from '../models/candidate.model';
@@ -30,7 +30,7 @@ export class AddEditCandidateComponent implements OnInit {
 
   selectedTechnologies: SelectItem[];
 
-  constructor(private service: CandidateTableApiService) {}
+  constructor(private service: CandidateTableApiService, private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.service.getTechnologiesList().subscribe((response: any[]) => {
@@ -60,8 +60,10 @@ export class AddEditCandidateComponent implements OnInit {
   AddCandidate(AddCandidateForm: NgForm) {
     this.service.addCan(this.candidate).subscribe((response: any) => {
       console.log(response);
+      this.messageService.add({key: 'myKey1', severity:'success', summary: 'Kandidatas sėkmingai pridėtas!'});
       // if (response.status == 200) {
       //   this.resetForm(AddCandidateForm);
+      this.resetForm(AddCandidateForm);
       // }
     });
   }

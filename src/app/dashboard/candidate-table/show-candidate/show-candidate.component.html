@@ -182,9 +182,7 @@
         ></button>
       </div>
       <div class="modal-body">
-        <p *ngFor="let technology of technologyList$ | async">
-          {{ technology.id }} - {{ technology.technologyName }}
-        </p>
+        <app-add-edit-delete-technology></app-add-edit-delete-technology>
       </div>
     </div>
   </div>
