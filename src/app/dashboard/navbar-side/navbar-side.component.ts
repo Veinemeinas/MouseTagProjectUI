@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { navbarData } from './nav-data';
 import { AccountLoginService } from './../../login-ui/login/services/account-login.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -19,9 +20,9 @@ interface SideNavToggle {
   styleUrls: ['./navbar-side.component.css'],
 })
 export class NavbarSideComponent implements OnInit {
-  constructor(private router: Router, private service: AccountLoginService) {}
+  constructor(private router: Router, private jwtHelper: JwtHelperService) {}
 
-  email = this.service.getUserProfile();
+  email = this.getUserProfile();
 
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   collapsed = false;
@@ -63,5 +64,14 @@ export class NavbarSideComponent implements OnInit {
   onLogout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
+  }
+
+  getUserProfile() {
+    var token = JSON.stringify(localStorage.getItem('token'));
+    console.log(this.jwtHelper.decodeToken(token));
+    const tokendec = this.jwtHelper.decodeToken(token);
+    const email = tokendec['Email'];
+    var res = email.split('@');
+    return res[0];
   }
 }

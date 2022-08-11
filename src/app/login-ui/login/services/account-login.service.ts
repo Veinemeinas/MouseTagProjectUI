@@ -16,12 +16,4 @@ export class AccountLoginService {
 
     return this.https.post(this.rootUrl + '/api/Auth/Login', account, options);
   }
-
-  getUserProfile() {
-    var token = JSON.stringify(localStorage.getItem('token'));
-    console.log(this.jwtHelper.decodeToken(token));
-    const tokendec = this.jwtHelper.decodeToken(token);
-    const email = tokendec['Email'];
-    return email;
-  }
 }

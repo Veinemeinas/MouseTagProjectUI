@@ -105,7 +105,7 @@
           ><button
             pButton
             pRipple
-            class="p-button-rounded p-button-success p-mr-2"
+            class="p-button-rounded p-button p-mr-2"
             (click)="editCandidate(candidate)"
           >
             <span class="material-icons-sharp"> edit </span>
@@ -117,7 +117,7 @@
           <button
             pButton
             pRipple
-            class="p-button-rounded p-button-warning"
+            class="p-button-rounded p-button"
             (click)="deleteCandidate(candidate)"
           >
             <span class="material-icons-sharp"> delete_forever </span>
@@ -133,7 +133,12 @@
   </ng-template>
 </p-table>
 
-<p-dialog [(visible)]="editDialog" header="Redaguoti Kandidatą" [modal]="true" styleClass="p-fluid">
+<p-dialog
+  [(visible)]="editDialog"
+  header="Redaguoti Kandidatą"
+  [modal]="true"
+  styleClass="p-fluid"
+>
   <div class="row mb-3">
     <div class="col">
       <div class="p-field">
@@ -141,7 +146,8 @@
         <input
           type="name"
           [(ngModel)]="updateCandidate.name"
-          pInputText id="name"
+          pInputText
+          id="name"
         />
       </div>
     </div>
@@ -153,7 +159,8 @@
           name="surname"
           type="surname"
           [(ngModel)]="updateCandidate.surname"
-          pInputText id="surname"
+          pInputText
+          id="surname"
         />
       </div>
     </div>
@@ -167,7 +174,8 @@
           name="linkedIn"
           type="linkedIn"
           [(ngModel)]="updateCandidate.linkedin"
-          pInputText id="linkedIn"
+          pInputText
+          id="linkedIn"
         />
       </div>
     </div>
@@ -235,8 +243,14 @@
   <div class="row">
     <div class="col"></div>
     <div class="col">
-      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveCandidate()"></button>
+      <button
+        pButton
+        pRipple
+        label="Save"
+        icon="pi pi-check"
+        class="p-button-text"
+        (click)="saveCandidate()"
+      ></button>
     </div>
   </div>
 </p-dialog>
-
