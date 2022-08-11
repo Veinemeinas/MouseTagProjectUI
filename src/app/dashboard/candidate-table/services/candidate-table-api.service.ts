@@ -7,7 +7,7 @@ import { Candidate } from '../models/candidate.model';
   providedIn: 'root',
 })
 export class CandidateTableApiService {
-  readonly candidateTableAPIUrl = 'https://localhost:44389/api';
+  readonly candidateTableAPIUrl = 'https://localhost:7271/api';
 
   constructor(private http: HttpClient) {}
 
@@ -52,15 +52,13 @@ export class CandidateTableApiService {
   updateCandidate(id: number | string, data: any) {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     let options = { headers: headers };
-    return this.http.put(
-      this.candidateTableAPIUrl + `/Candidates/${id}`,
-      data,
-      options
-    ).pipe(catchError((error)=>
-    {
-      return NEVER;
-    })
-    );
+    return this.http
+      .put(this.candidateTableAPIUrl + `/Candidates/${id}`, data, options)
+      .pipe(
+        catchError((error) => {
+          return NEVER;
+        })
+      );
   }
 
   deleteCandidate(id: number | string) {
