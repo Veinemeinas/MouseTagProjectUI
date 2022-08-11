@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CandidateTableApiService } from '../services/candidate-table-api.service';
-import { Candidate, DeleteCandidate } from '../models/candidate.model';
+import { Candidate, DeleteCandidate, UpdateCandidate } from '../models/candidate.model';
 import { FilterService, MessageService, SelectItem } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { Table } from 'primeng/table';
@@ -18,9 +18,13 @@ export class ShowCandidateComponent implements OnInit {
 
   candidates: Candidate[];
 
+  editDialog: boolean = false;
+
   totalRecords: number;
 
   candidate: Candidate;
+
+  updateCandidate: UpdateCandidate;
 
   loading: boolean = true;
 
@@ -50,6 +54,18 @@ export class ShowCandidateComponent implements OnInit {
         return value.some((v) => filter.some((f) => f === v.id));
       }
     );
+
+    this.updateCandidate = {
+      id: 0,
+      whenWasContacted: [],
+      name: '',
+      surname: '',
+      linkedin: '',
+      comment: '',
+      available: true,
+      technologyIds: [],
+      willBeContacted: '',
+    };
 
     this.technologyList$ = this.service.getTechnologiesList();
 
@@ -122,4 +138,43 @@ export class ShowCandidateComponent implements OnInit {
       },
     });
   }
+
+  editCandidate(candidates: UpdateCandidate) {
+    this.updateCandidate = candidates;
+    this.editDialog = true;
+    
+  }
+
+  saveCandidate()
+  {
+    console.log(this.candidate);
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to update ' + this.updateCandidate.name + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      key: 'account',
+      accept: () => {
+        this.service.updateCandidate(this.updateCandidate.id, this.updateCandidate)
+          .subscribe((res) => this.refreshCandidate());
+          this.editDialog = false;
+      },
+    });
+  }
+
+  // onSelectAllChange(event) {
+  //   const checked = event.checked;
+
+  //   if (checked) {
+  //     this.service.getCandidatesList().subscribe((data) => {
+  //       console.log(data);
+  //       this.candidates = data;
+  //       this.candidates.forEach((candidate) => candidate.whenWasContacted);
+  //       this.selectAll = true;
+  //       this.loading = false;
+  //     });
+  //   } else {
+  //     this.technologyOptions = [];
+  //     this.selectAll = false;
+  //   }
+  // }
 }

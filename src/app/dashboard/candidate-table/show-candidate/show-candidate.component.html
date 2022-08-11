@@ -106,6 +106,7 @@
             pButton
             pRipple
             class="p-button-rounded p-button-success p-mr-2"
+            (click)="editCandidate(candidate)"
           >
             <span class="material-icons-sharp"> edit </span>
           </button></span
@@ -131,3 +132,111 @@
     </tr>
   </ng-template>
 </p-table>
+
+<p-dialog [(visible)]="editDialog" header="Redaguoti Kandidatą" [modal]="true" styleClass="p-fluid">
+  <div class="row mb-3">
+    <div class="col">
+      <div class="p-field">
+        <label class="mb-1" for="name">Vardas</label>
+        <input
+          type="name"
+          [(ngModel)]="updateCandidate.name"
+          pInputText id="name"
+        />
+      </div>
+    </div>
+    <div class="col">
+      <div class="p-field">
+        <label class="mb-1" for="surname">Pavardė</label>
+        <input
+          id="surname"
+          name="surname"
+          type="surname"
+          [(ngModel)]="updateCandidate.surname"
+          pInputText id="surname"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <div class="p-field">
+        <label class="mb-1" for="linkedIn">LinkedIn Url</label>
+        <input
+          id="linkedIn"
+          name="linkedIn"
+          type="linkedIn"
+          [(ngModel)]="updateCandidate.linkedin"
+          pInputText id="linkedIn"
+        />
+      </div>
+    </div>
+    <div class="col">
+      <label class="mb-2" for="available">Ar atviras pasiūlymui?</label>
+      <p-toggleButton
+        name="available"
+        [(ngModel)]="updateCandidate.available"
+        onIcon="pi pi-check"
+        offIcon="pi pi-times"
+      ></p-toggleButton>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <label class="mb-1" for="username1">Technologijos</label>
+      <div class="p-field" style="width: 442px">
+        <p-multiSelect
+          name="technologyIds"
+          [options]="technologyOptions"
+          [(ngModel)]="updateCandidate.technologyIds"
+          [style]="{ width: '100%' }"
+          [panelStyle]="{ width: '100%' }"
+        ></p-multiSelect>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <div class="p-field">
+        <label class="mb-1" for="date1">Kada susiekta?</label>
+        <p-calendar
+          name="whenWasContacted"
+          [(ngModel)]="updateCandidate.whenWasContacted"
+          [showIcon]="true"
+          inputId="icon"
+        ></p-calendar>
+      </div>
+    </div>
+    <div class="col">
+      <div class="p-field">
+        <label class="mb-1" for="date1">Planuojamas susitikimas</label>
+        <p-calendar
+          name="willBeContacted"
+          [(ngModel)]="updateCandidate.willBeContacted"
+          [showIcon]="true"
+          inputId="icon"
+        ></p-calendar>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col ms-auto">
+      <div class="p-field" style="width: 442px; min-height: 200px">
+        <label class="mb-1" for="username1">Komentaras</label>
+        <textarea
+          pInputTextarea
+          [(ngModel)]="updateCandidate.comment"
+          name="comments"
+          [style]="{ width: '100%', height: '200px' }"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveCandidate()"></button>
+    </div>
+  </div>
+</p-dialog>
+

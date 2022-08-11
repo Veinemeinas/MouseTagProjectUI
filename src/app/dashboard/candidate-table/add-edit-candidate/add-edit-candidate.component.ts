@@ -4,7 +4,7 @@ import { CandidateTableApiService } from '../services/candidate-table-api.servic
 import { SelectItem, MessageService } from 'primeng/api';
 
 import { FormGroup } from '@angular/forms';
-import { Candidate } from '../models/candidate.model';
+import { AddCandidate, Candidate } from '../models/candidate.model';
 import { NgForm } from '@angular/forms';
 import { ShowCandidateComponent } from './../show-candidate/show-candidate.component';
 
@@ -14,7 +14,9 @@ import { ShowCandidateComponent } from './../show-candidate/show-candidate.compo
   styleUrls: ['./add-edit-candidate.component.css'],
 })
 export class AddEditCandidateComponent implements OnInit {
+  candidates: Candidate[]
   candidate: Candidate;
+  addCandidate: AddCandidate;
 
   candidateForm!: FormGroup;
 
@@ -23,6 +25,9 @@ export class AddEditCandidateComponent implements OnInit {
   contactedDate: Date;
 
   meetDate: Date;
+
+  foundIt: boolean = false;
+  empty: boolean = false;
 
   candidateList$: Observable<any[]>;
   technologyList$: Observable<any[]>;
@@ -40,7 +45,11 @@ export class AddEditCandidateComponent implements OnInit {
     this.service.getTechnologiesList().subscribe((response: any[]) => {
       this.technologyOptions = response.map((x) => {
         return { value: x.id, label: x.technologyName };
-      });
+      });  
+    });
+
+    this.service.getCandidatesList().subscribe((data) => {
+      this.candidates = data;
     });
 
     this.resetForm();
@@ -58,10 +67,46 @@ export class AddEditCandidateComponent implements OnInit {
       technologyIds: [],
       willBeContacted: '',
     };
+    this.addCandidate = {
+      whenWasContacted: new Date(Date.now()),
+      name: '',
+      surname: '',
+      linkedin: '',
+      comment: '',
+      available: true,
+      technologyIds: [],
+      willBeContacted: new Date(Date.now()),
+    }
   }
 
   AddCandidate(AddCandidateForm: NgForm) {
-    this.service.addCan(this.candidate).subscribe((response: any) => {
+    this.empty = false;
+    this.foundIt = false;
+    if (
+      this.addCandidate.name == '' ||
+      this.addCandidate.surname == '' ||
+      this.addCandidate.name == undefined ||
+      this.addCandidate.surname == undefined
+    ) {
+      this.empty = true;
+      }
+    if (!this.empty) {
+      for (var i = 0; i < this.candidates.length; i++) {
+        if (
+          this.candidates[i].name.toLowerCase() ==
+          this.addCandidate.name.toLowerCase() &&
+          this.candidates[i].surname.toLowerCase() ==
+          this.addCandidate.surname.toLowerCase()
+        ) 
+        {
+          this.empty = false;
+          this.foundIt = true;
+        }
+      }
+    }
+      if (!this.empty && !this.foundIt) {
+        console.log(this.addCandidate);
+    this.service.addCan(this.addCandidate).subscribe((response: any) => {
       //this.comp.refreshCandidateAdd();
       // this.messageService.add({
       //   key: 'myKey1',
@@ -72,4 +117,5 @@ export class AddEditCandidateComponent implements OnInit {
       // }
     });
   }
+}
 }

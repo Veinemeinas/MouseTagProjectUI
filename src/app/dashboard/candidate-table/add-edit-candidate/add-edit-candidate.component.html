@@ -10,11 +10,14 @@
         <label class="mb-1" for="name">Vardas</label>
         <input
           id="name"
-          [(ngModel)]="candidate.name"
+          [(ngModel)]="addCandidate.name"
           name="name"
           type="name"
+          required
           pInputText
         />
+        <small id="username2-help" class="p-error block" *ngIf="foundIt">Toks vartotojas jau užregistruotas sistemoje!</small>
+        <small id="username2-help" class="p-error block" *ngIf="empty">Įveskite Kandidato vardą!</small>
       </div>
     </div>
     <div class="col">
@@ -22,11 +25,13 @@
         <label class="mb-1" for="surname">Pavardė</label>
         <input
           id="surname"
-          [(ngModel)]="candidate.surname"
+          [(ngModel)]="addCandidate.surname"
           name="surname"
           type="surname"
           pInputText
         />
+        <small id="username2-help" class="p-error block" *ngIf="foundIt">Toks vartotojas jau užregistruotas sistemoje!</small>
+        <small id="username2-help" class="p-error block" *ngIf="empty">Įveskite Kandidato pavardę!</small>
       </div>
     </div>
   </div>
@@ -36,7 +41,7 @@
         <label class="mb-1" for="linkedIn">LinkedIn Url</label>
         <input
           id="linkedIn"
-          [(ngModel)]="candidate.linkedin"
+          [(ngModel)]="addCandidate.linkedin"
           name="linkedIn"
           type="linkedIn"
           pInputText
@@ -46,7 +51,7 @@
     <div class="col">
       <label class="mb-2" for="available">Ar atviras pasiūlymui?</label>
       <p-toggleButton
-        [(ngModel)]="candidate.available"
+        [(ngModel)]="addCandidate.available"
         name="available"
         onIcon="pi pi-check"
         offIcon="pi pi-times"
@@ -58,7 +63,7 @@
       <label class="mb-1" for="username1">Technologijos</label>
       <div class="p-field" style="width: 442px">
         <p-multiSelect
-          [(ngModel)]="candidate.technologyIds"
+          [(ngModel)]="addCandidate.technologyIds"
           name="technologyIds"
           [options]="technologyOptions"
           [style]="{ width: '100%' }"
@@ -72,7 +77,7 @@
       <div class="p-field">
         <label class="mb-1" for="date1">Kada susiekta?</label>
         <p-calendar
-          [(ngModel)]="candidate.whenWasContacted"
+          [(ngModel)]="addCandidate.whenWasContacted"
           name="whenWasContacted"
           [showIcon]="true"
           inputId="icon"
@@ -83,7 +88,7 @@
       <div class="p-field">
         <label class="mb-1" for="date1">Planuojamas susitikimas</label>
         <p-calendar
-          [(ngModel)]="candidate.willBeContacted"
+          [(ngModel)]="addCandidate.willBeContacted"
           name="willBeContacted"
           [showIcon]="true"
           inputId="icon"
@@ -97,7 +102,7 @@
         <label class="mb-1" for="username1">Komentaras</label>
         <textarea
           pInputTextarea
-          [(ngModel)]="candidate.comment"
+          [(ngModel)]="addCandidate.comment"
           name="comments"
           [style]="{ width: '100%', height: '200px' }"
         ></textarea>
