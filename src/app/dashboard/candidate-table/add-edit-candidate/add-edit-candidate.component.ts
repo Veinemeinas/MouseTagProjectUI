@@ -30,11 +30,13 @@ export class AddEditCandidateComponent implements OnInit {
 
   selectedTechnologies: SelectItem[];
 
-  constructor(private service: CandidateTableApiService, private messageService: MessageService) {}
+  constructor(
+    private service: CandidateTableApiService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
     this.service.getTechnologiesList().subscribe((response: any[]) => {
-      console.log(response);
       this.technologyOptions = response.map((x) => {
         return { value: x.id, label: x.technologyName };
       });
@@ -59,8 +61,11 @@ export class AddEditCandidateComponent implements OnInit {
 
   AddCandidate(AddCandidateForm: NgForm) {
     this.service.addCan(this.candidate).subscribe((response: any) => {
-      console.log(response);
-      this.messageService.add({key: 'myKey1', severity:'success', summary: 'Kandidatas sėkmingai pridėtas!'});
+      this.messageService.add({
+        key: 'myKey1',
+        severity: 'success',
+        summary: 'Kandidatas sėkmingai pridėtas!',
+      });
       // if (response.status == 200) {
       //   this.resetForm(AddCandidateForm);
       this.resetForm(AddCandidateForm);
