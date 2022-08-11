@@ -48,6 +48,7 @@ import { FileUplComponent } from './import-page/file-upl/file-upl.component';
 
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import {ToolbarModule} from 'primeng/toolbar';
 
 import { FileUploadModule } from 'primeng/fileupload';
 
@@ -107,6 +108,7 @@ FullCalendarModule.registerPlugins([
     ConfirmDialogModule,
     FileUploadModule,
     FullCalendarModule,
+    ToolbarModule,
   ],
   providers: [
     AccountService,

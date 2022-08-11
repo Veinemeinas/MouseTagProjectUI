@@ -27,12 +27,12 @@ export class DeleteCandidate {
 
 export class UpdateCandidate {
   id: number;
-  whenWasContacted: string[];
+  whenWasContacted: Date;
   name: string;
   surname: string;
   linkedin: string;
   comment: string;
   available: boolean = true;
   technologyIds: number[];
-  willBeContacted: string;
+  willBeContacted: Date;
 }

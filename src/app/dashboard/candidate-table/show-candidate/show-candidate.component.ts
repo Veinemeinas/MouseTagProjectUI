@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CandidateTableApiService } from '../services/candidate-table-api.service';
-import { Candidate, DeleteCandidate, UpdateCandidate } from '../models/candidate.model';
+import { AddCandidate, Candidate, DeleteCandidate, UpdateCandidate } from '../models/candidate.model';
 import { FilterService, MessageService, SelectItem } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { Table } from 'primeng/table';
@@ -20,11 +20,19 @@ export class ShowCandidateComponent implements OnInit {
 
   editDialog: boolean = false;
 
+  addDialog: boolean = false;
+
   totalRecords: number;
 
   candidate: Candidate;
 
+  foundIt: boolean = false;
+  emptyName: boolean = false;
+  emptySurname: boolean = false;
+
   updateCandidate: UpdateCandidate;
+
+  addCandidateModel: AddCandidate;
 
   loading: boolean = true;
 
@@ -57,14 +65,25 @@ export class ShowCandidateComponent implements OnInit {
 
     this.updateCandidate = {
       id: 0,
-      whenWasContacted: [],
+      whenWasContacted: new Date(Date.now()),
       name: '',
       surname: '',
       linkedin: '',
       comment: '',
       available: true,
       technologyIds: [],
-      willBeContacted: '',
+      willBeContacted: new Date(Date.now()),
+    };
+
+    this.addCandidateModel = {
+      whenWasContacted: new Date(Date.now()),
+      name: '',
+      surname: '',
+      linkedin: '',
+      comment: '',
+      available: true,
+      technologyIds: [],
+      willBeContacted: new Date(Date.now()),
     };
 
     this.technologyList$ = this.service.getTechnologiesList();
@@ -95,12 +114,11 @@ export class ShowCandidateComponent implements OnInit {
     this.technologyOptions = value;
   }
 
-  refreshCandidate() {
+  refreshCandidate(message: string) {
     this.messageService.add({
       key: 'myKey1',
       severity: 'success',
-      summary: 'Successful',
-      detail: 'Product Deleted',
+      summary: message,
       life: 3000,
     }),
       this.service.getCandidatesList().subscribe((data) => {
@@ -114,8 +132,7 @@ export class ShowCandidateComponent implements OnInit {
     this.messageService.add({
       key: 'myKey1',
       severity: 'success',
-      summary: 'Sėkmingai',
-      detail: 'Kandidatas sėkmingai pridėtas',
+      summary: 'Kandidatas sėkmingai pridėtas',
       life: 3000,
     }),
       this.service.getCandidatesList().subscribe((data) => {
@@ -127,38 +144,80 @@ export class ShowCandidateComponent implements OnInit {
 
   deleteCandidate(candidates: DeleteCandidate) {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + candidates.name + '?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
+      message: 'Ar norite ištrinti kandidatą ' + candidates.name + '?',
+      header: 'Patvirtinimas',
       key: 'account',
       accept: () => {
         this.service
           .deleteCandidate(candidates.id)
-          .subscribe((res) => this.refreshCandidate());
+          .subscribe((res) => this.refreshCandidate('Kandidatas ištrintas'));
       },
     });
   }
 
-  editCandidate(candidates: UpdateCandidate) {
-    this.updateCandidate = candidates;
+  editCandidate(candidates: Candidate, updateCandidate: UpdateCandidate, id : number, technologies : Array<any>) {
+    this.updateCandidate = {
+      id: id,
+      whenWasContacted: new Date(candidates.whenWasContacted[candidates.whenWasContacted.length - 1]),
+      name: candidates.name,
+      surname: candidates.surname,
+      linkedin: candidates.linkedin,
+      comment: candidates.comment,
+      available: true,
+      technologyIds: technologies.map(a => a.id),
+      willBeContacted: new Date(candidates.willBeContacted),
+    };
     this.editDialog = true;
     
   }
 
+  addCandidate()
+  {
+    this.addDialog = true;
+  }
+
+  saveNewCandidate(candidate : AddCandidate)
+  {
+    this.emptyName = false;
+    this.emptySurname = false;
+    this.foundIt = false;
+    
+    if(candidate.name == '')
+    {
+      this.emptyName = true;
+    }
+    if(candidate.surname == '')
+    {
+      this.emptySurname = true;
+    }
+    if(!this.emptyName && !this.emptySurname)
+    {
+      for (var i = 0; i < this.candidates.length; i++)
+      {
+        if (
+              this.candidates[i].name.toLowerCase() ==
+              candidate.name.toLowerCase() &&
+              this.candidates[i].surname.toLowerCase() ==
+              candidate.surname.toLowerCase()
+          )
+          {
+            this.foundIt = true;
+          } 
+      } 
+    }
+    if(!this.emptyName && !this.emptySurname && !this.foundIt)
+    {
+      this.service.addCandidate(candidate).subscribe((res) => this.refreshCandidateAdd());
+      this.addDialog = false;
+    }
+  }
+
   saveCandidate()
   {
-    console.log(this.candidate);
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to update ' + this.updateCandidate.name + '?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      key: 'account',
-      accept: () => {
-        this.service.updateCandidate(this.updateCandidate.id, this.updateCandidate)
-          .subscribe((res) => this.refreshCandidate());
-          this.editDialog = false;
-      },
-    });
+      this.service.updateCandidate(this.updateCandidate.id, this.updateCandidate)
+        .subscribe((res) => this.refreshCandidate('Kandidatas atnaujintas'));
+      this.editDialog = false;
+    };
   }
 
   // onSelectAllChange(event) {
@@ -177,4 +236,4 @@ export class ShowCandidateComponent implements OnInit {
   //     this.selectAll = false;
   //   }
   // }
-}
+
