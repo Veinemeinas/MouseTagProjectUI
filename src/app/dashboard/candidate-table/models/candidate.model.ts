@@ -9,6 +9,11 @@ export class Candidate {
   willBeContacted: string;
 }
 
+export class CandidateDate {
+  title: string;
+  date: string;
+}
+
 export class AddCandidate {
   whenWasContacted: Date;
   name: string;
