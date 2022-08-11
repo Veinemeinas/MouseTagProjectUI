@@ -65,15 +65,6 @@ export class ShowCandidateComponent implements OnInit {
         return { value: x.id, label: x.technologyName };
       });
     });
-
-    // Variables
-    //modalTitle: string = '';
-    //activateAddEditCandidateComponent: boolean = false;
-    //candidate: any;
-
-    // modalAdd() {
-    //    this.candidate = {};
-    // }
   }
 
   filterNames(event: any) {
@@ -99,7 +90,6 @@ export class ShowCandidateComponent implements OnInit {
       this.service.getCandidatesList().subscribe((data) => {
         this.candidates = data;
         this.candidates.forEach((candidate) => candidate.whenWasContacted);
-        //this.totalRecords = res.totalRecords;
         this.loading = false;
       });
   }
@@ -132,21 +122,4 @@ export class ShowCandidateComponent implements OnInit {
       },
     });
   }
-
-  // onSelectAllChange(event) {
-  //   const checked = event.checked;
-
-  //   if (checked) {
-  //     this.service.getCandidatesList().subscribe((data) => {
-  //       console.log(data);
-  //       this.candidates = data;
-  //       this.candidates.forEach((candidate) => candidate.whenWasContacted);
-  //       this.selectAll = true;
-  //       this.loading = false;
-  //     });
-  //   } else {
-  //     this.technologyOptions = [];
-  //     this.selectAll = false;
-  //   }
-  // }
 }

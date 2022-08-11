@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
+import { FileUpl, TestUpl } from './models/file-upl.model';
+import { FileUplService } from './services/file-upl.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-file-upl',
@@ -7,8 +10,13 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./file-upl.component.css'],
 })
 export class FileUplComponent implements OnInit {
-  data: any;
-  constructor() {}
+  datatest: TestUpl = { email: '', password: '' };
+  data: any[][] = [];
+  Exel: FileUpl[] = [];
+  constructor(
+    private service: FileUplService,
+    private messageService: MessageService
+  ) {}
   ngOnInit(): void {}
   onFileChange(evt: any) {
     const target: DataTransfer = <DataTransfer>evt.target;
@@ -21,7 +29,28 @@ export class FileUplComponent implements OnInit {
       const wsname: string = wb.SheetNames[0];
       const ws: XLSX.WorkSheet = wb.Sheets[wsname];
       this.data = XLSX.utils.sheet_to_json(ws, { header: 1 });
-      console.log(this.data);
+      for (let index = 0; index < this.data.length; index++) {
+        this.Exel.push({} as FileUpl);
+        this.Exel[index].dateListAsInt = String(this.data[index][0]);
+        this.Exel[index].name = this.data[index][1];
+        this.Exel[index].surname = this.data[index][2];
+        this.Exel[index].linkedin = this.data[index][3];
+        this.Exel[index].comment = this.data[index][4];
+        this.Exel[index].technologyListAsString = this.data[index][5];
+      }
+      console.log(this.Exel);
+      this.datatest.email = 'user@example.com';
+      this.datatest.password = 'string';
+      console.log(this.datatest);
+      this.service.FileUpload(this.datatest).subscribe((data: any) => {
+        this.messageService.add({
+          key: 'myKey1',
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Product Deleted',
+          life: 3000,
+        });
+      });
     };
     reader.readAsBinaryString(target.files[0]);
   }

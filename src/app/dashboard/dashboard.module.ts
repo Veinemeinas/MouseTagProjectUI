@@ -49,6 +49,8 @@ import { FileUplComponent } from './import-page/file-upl/file-upl.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 
+import { FileUploadModule } from 'primeng/fileupload';
+
 @NgModule({
   declarations: [
     SignUpComponent,
@@ -93,6 +95,7 @@ import { ConfirmationService } from 'primeng/api';
     DropdownModule,
     ProgressBarModule,
     ConfirmDialogModule,
+    FileUploadModule,
   ],
   providers: [
     AccountService,
