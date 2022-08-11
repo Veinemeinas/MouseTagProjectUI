@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CandidateTableApiService } from '../services/candidate-table-api.service';
 import { Candidate, DeleteCandidate } from '../models/candidate.model';
-import { MessageService, SelectItem } from 'primeng/api';
+import { FilterService, MessageService, SelectItem } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-show-candidate',
@@ -11,6 +12,10 @@ import { ConfirmationService } from 'primeng/api';
   styleUrls: ['./show-candidate.component.css'],
 })
 export class ShowCandidateComponent implements OnInit {
+  technologyFilterName = 'technology-equals';
+
+  @ViewChild('dt') table: Table;
+
   candidates: Candidate[];
 
   totalRecords: number;
@@ -32,10 +37,20 @@ export class ShowCandidateComponent implements OnInit {
   constructor(
     private service: CandidateTableApiService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private filterService: FilterService
   ) {}
 
   ngOnInit(): void {
+    this.filterService.register(
+      this.technologyFilterName,
+      (value: any[], filter: number[]) => {
+        console.log(filter);
+        console.log(value);
+        return value.some((v) => filter.some((f) => f === v.id));
+      }
+    );
+
     this.technologyList$ = this.service.getTechnologiesList();
 
     this.service.getCandidatesList().subscribe((data) => {
@@ -61,6 +76,13 @@ export class ShowCandidateComponent implements OnInit {
     // }
   }
 
+  filterNames(event: any) {
+    this.table.filterGlobal(event.target.value, 'contains');
+  }
+  filterTechnologies(event: any) {
+    this.table.filter(event.value, 'technologies', 'technology-equals');
+  }
+
   onSelectionChange(value = []) {
     this.selectAll = value.length === this.totalRecords;
     this.technologyOptions = value;
@@ -78,6 +100,21 @@ export class ShowCandidateComponent implements OnInit {
         this.candidates = data;
         this.candidates.forEach((candidate) => candidate.whenWasContacted);
         //this.totalRecords = res.totalRecords;
+        this.loading = false;
+      });
+  }
+
+  refreshCandidateAdd() {
+    this.messageService.add({
+      key: 'myKey1',
+      severity: 'success',
+      summary: 'Sėkmingai',
+      detail: 'Kandidatas sėkmingai pridėtas',
+      life: 3000,
+    }),
+      this.service.getCandidatesList().subscribe((data) => {
+        this.candidates = data;
+        this.candidates.forEach((candidate) => candidate.whenWasContacted);
         this.loading = false;
       });
   }

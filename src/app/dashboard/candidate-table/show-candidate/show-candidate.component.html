@@ -1,5 +1,5 @@
 <p-table
-  #dt2
+  #dt
   [value]="candidates"
   dataKey="id"
   [rows]="10"
@@ -17,7 +17,12 @@
         <div class="p-d-flex">
           <span class="p-input-icon-left p-ml-auto">
             <i class="pi pi-search"></i>
-            <input pInputText type="text" placeholder="Ieškoti" />
+            <input
+              pInputText
+              type="text"
+              (input)="filterNames($event)"
+              placeholder="Ieškoti"
+            />
           </span>
         </div>
       </th>
@@ -33,25 +38,19 @@
         >
           <ng-template pTemplate="filter" let-value let-filter="filterCallback">
             <p-multiSelect
-              [ngModel]="value"
               [options]="technologyOptions"
               placeholder="Pasirinkti"
-              (onChange)="filter($event.value)"
-              optionLabel="technologyIds"
+              (onChange)="filterTechnologies($event)"
             >
-              <ng-template let-technologies pTemplate="item">
-                <div class="p-multiselect-representative-option">
-                  <span class="p-ml-1">{{ technologies.technologyName }}</span>
-                </div>
-              </ng-template>
             </p-multiSelect>
           </ng-template>
         </p-columnFilter>
       </th>
       <th></th>
       <th>
-        <p-columnFilter type="boolean" field="verified"></p-columnFilter>
+        <p-columnFilter type="boolean" field="available"></p-columnFilter>
       </th>
+      <th></th>
       <th></th>
     </tr>
     <tr>
@@ -63,6 +62,7 @@
       <th>Technologijos</th>
       <th>Kada reikia susisiekti</th>
       <th>Ar atviras pasiūlymams</th>
+      <th></th>
       <th></th>
     </tr>
   </ng-template>
@@ -110,6 +110,8 @@
             <span class="material-icons-sharp"> edit </span>
           </button></span
         >
+      </td>
+      <td>
         <span>
           <button
             pButton

@@ -62,13 +62,12 @@ export class AddEditCandidateComponent implements OnInit {
 
   AddCandidate(AddCandidateForm: NgForm) {
     this.service.addCan(this.candidate).subscribe((response: any) => {
-      this.messageService.add({
-        key: 'myKey1',
-        severity: 'success',
-        summary: 'Kandidatas sėkmingai pridėtas!',
-      });
-      // if (response.status == 200) {
-      //   this.resetForm(AddCandidateForm);
+      //this.comp.refreshCandidateAdd();
+      // this.messageService.add({
+      //   key: 'myKey1',
+      //   severity: 'success',
+      //   summary: 'Kandidatas sėkmingai pridėtas!',
+      // });
       this.resetForm(AddCandidateForm);
       // }
     });
