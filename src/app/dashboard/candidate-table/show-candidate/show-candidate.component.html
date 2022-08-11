@@ -1,3 +1,9 @@
+<div class="card">
+  <p-toolbar styleClass="mb-2">
+      <ng-template pTemplate="left">
+          <button pButton icon="pi pi-plus" class="p-button-success mr-2" (click)="addCandidate()"></button>
+      </ng-template>
+  </p-toolbar>
 <p-table
   #dt
   [value]="candidates"
@@ -69,7 +75,9 @@
   <ng-template pTemplate="body" let-candidate>
     <tr>
       <td>
-        {{ candidate.whenWasContacted[0] | date: "yyyy/MM/dd" }}
+        <span *ngFor="let whenWasContactedDate of candidate.whenWasContacted">
+          {{whenWasContactedDate | date: "yyyy/MM/dd"}}, <br>
+        </span>
       </td>
       <td>
         <span>{{ candidate.name }}</span>
@@ -85,7 +93,7 @@
       </td>
       <td>
         <span *ngFor="let technology of candidate.technologies"
-          >{{ technology.technologyName }},&nbsp;</span
+          >{{ technology.technologyName }},<br></span
         >
       </td>
       <td>
@@ -103,10 +111,10 @@
       <td>
         <span
           ><button
-            pButton
-            pRipple
-            class="p-button-rounded p-button p-mr-2"
-            (click)="editCandidate(candidate)"
+          pButton
+          pRipple
+          class="p-button-rounded p-button-success p-mr-2"
+          (click)="editCandidate(candidate, updateCandidate, candidate.id, candidate.technologies)"
           >
             <span class="material-icons-sharp"> edit </span>
           </button></span
@@ -206,7 +214,7 @@
   <div class="row mb-3">
     <div class="col">
       <div class="p-field">
-        <label class="mb-1" for="date1">Kada susiekta?</label>
+        <label class="mb-1" for="date1">Kada susisiekta?</label>
         <p-calendar
           name="whenWasContacted"
           [(ngModel)]="updateCandidate.whenWasContacted"
@@ -254,3 +262,118 @@
     </div>
   </div>
 </p-dialog>
+
+<p-dialog [(visible)]="addDialog" header="Pridėti Kandidatą" [modal]="true" styleClass="p-fluid">
+  <small id="username2-help" class="p-error block" *ngIf="foundIt">Vartotojas jau egzistuoja!</small>
+  <br *ngIf="foundIt">
+  <small id="username2-help" class="p-error block" *ngIf="emptyName">Įveskite Kandidato vardą!</small>
+  <br *ngIf="emptyName">
+  <small id="username2-help" class="p-error block" *ngIf="emptySurname">Įveskite Kandidato pavardę!</small>
+  <br *ngIf="emptySurname">
+  <div class="row mb-3">
+    <div class="col">
+      <div class="p-field">
+        <label class="mb-1" for="name">Vardas</label>
+        <input
+          type="name"
+          [(ngModel)]="addCandidateModel.name"
+          pInputText id="name"
+        />
+      </div>
+    </div>
+    <div class="col">
+      <div class="p-field">
+        <label class="mb-1" for="surname">Pavardė</label>
+        <input
+          id="surname"
+          name="surname"
+          type="surname"
+          [(ngModel)]="addCandidateModel.surname"
+          pInputText id="surname"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <div class="p-field">
+        <label class="mb-1" for="linkedIn">LinkedIn Url</label>
+        <input
+          id="linkedIn"
+          name="linkedIn"
+          type="linkedIn"
+          [(ngModel)]="addCandidateModel.linkedin"
+          pInputText id="linkedIn"
+        />
+      </div>
+    </div>
+    <div class="col">
+      <label class="mb-2" for="available">Ar atviras pasiūlymui?</label>
+      <p-toggleButton
+        name="available"
+        [(ngModel)]="addCandidateModel.available"
+        onIcon="pi pi-check"
+        offIcon="pi pi-times"
+      ></p-toggleButton>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <label class="mb-1" for="username1">Technologijos</label>
+      <div class="p-field" style="width: 442px">
+        <p-multiSelect
+          name="technologyIds"
+          [options]="technologyOptions"
+          [(ngModel)]="addCandidateModel.technologyIds"
+          [style]="{ width: '100%' }"
+          [panelStyle]="{ width: '100%' }"
+        ></p-multiSelect>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col">
+      <div class="p-field">
+        <label class="mb-1" for="date1">Kada susisiekta?</label>
+        <p-calendar
+          name="whenWasContacted"
+          [(ngModel)]="addCandidateModel.whenWasContacted"
+          [showIcon]="true"
+          inputId="icon"
+        ></p-calendar>
+      </div>
+    </div>
+    <div class="col">
+      <div class="p-field">
+        <label class="mb-1" for="date1">Planuojamas susitikimas</label>
+        <p-calendar
+          name="willBeContacted"
+          [(ngModel)]="addCandidateModel.willBeContacted"
+          [showIcon]="true"
+          inputId="icon"
+        ></p-calendar>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col ms-auto">
+      <div class="p-field" style="width: 442px; min-height: 200px">
+        <label class="mb-1" for="username1">Komentaras</label>
+        <textarea
+          pInputTextarea
+          [(ngModel)]="addCandidateModel.comment"
+          name="comments"
+          [style]="{ width: '100%', height: '200px' }"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveNewCandidate(addCandidateModel)"></button>
+    </div>
+  </div>
+</p-dialog>
+
+

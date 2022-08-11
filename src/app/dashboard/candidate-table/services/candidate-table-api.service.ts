@@ -61,6 +61,11 @@ export class CandidateTableApiService {
       );
   }
 
+  getCandidate(id: number | string)
+  {
+    return this.http.get(this.candidateTableAPIUrl + `/Candidates/${id}`);
+  }
+
   deleteCandidate(id: number | string) {
     return this.http.delete(this.candidateTableAPIUrl + `/Candidates/${id}`);
   }
