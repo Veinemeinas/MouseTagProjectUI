@@ -1,3 +1,7 @@
+body {
+  background: #f4f7fa !important;
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -10,6 +14,9 @@
 .card .card-head {
   padding: 1rem 1.5rem;
   border-bottom: 1px solid #edf1f7;
+}
+
+.headf {
   font-size: 1.3rem;
   font-weight: 600;
 }

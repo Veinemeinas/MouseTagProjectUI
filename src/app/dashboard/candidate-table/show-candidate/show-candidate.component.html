@@ -52,6 +52,7 @@
       <th>
         <p-columnFilter type="boolean" field="verified"></p-columnFilter>
       </th>
+      <th></th>
     </tr>
     <tr>
       <th>Kada buvo susisiekta</th>
@@ -62,6 +63,7 @@
       <th>Technologijos</th>
       <th>Kada reikia susisiekti</th>
       <th>Ar atviras pasiūlymams</th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-candidate>
@@ -97,6 +99,24 @@
             'false-icon pi-times-circle': !candidate.available
           }"
         ></i>
+      </td>
+      <td>
+        <span
+          ><button
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success p-mr-2"
+          ></button
+        ></span>
+        <span>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-warning"
+          ></button
+        ></span>
       </td>
     </tr>
   </ng-template>

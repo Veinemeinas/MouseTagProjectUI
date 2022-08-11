@@ -9,14 +9,10 @@ export const navbarData = [
     title: 'Kalendorius',
     label: 'calendar_month',
   },
-  {
-    routeLink: 'import',
-    title: 'Importinimas',
-    label: 'publish',
-  },
+
   {
     routeLink: 'settings',
-    title: 'Nustatymai',
-    label: 'settings',
+    title: 'Vartotojai',
+    label: 'manage_accounts',
   },
 ];
