@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { CandidateTableApiService } from '../services/candidate-table-api.service';
 import { SelectItem, MessageService } from 'primeng/api';
 
 import { FormGroup } from '@angular/forms';
 import { Candidate } from '../models/candidate.model';
 import { NgForm } from '@angular/forms';
+import { ShowCandidateComponent } from './../show-candidate/show-candidate.component';
 
 @Component({
   selector: 'app-add-edit-candidate',

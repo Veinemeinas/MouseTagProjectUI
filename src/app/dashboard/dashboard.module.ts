@@ -46,6 +46,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { FileUplComponent } from './import-page/file-upl/file-upl.component';
 
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+
 @NgModule({
   declarations: [
     SignUpComponent,
@@ -89,12 +92,14 @@ import { FileUplComponent } from './import-page/file-upl/file-upl.component';
     ButtonModule,
     DropdownModule,
     ProgressBarModule,
+    ConfirmDialogModule,
   ],
   providers: [
     AccountService,
     CandidateTableApiService,
     MessageService,
     CustomerService,
+    ConfirmationService,
   ],
   bootstrap: [AppComponentt],
 })

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CandidateTableApiService } from '../services/candidate-table-api.service';
-import { Candidate } from '../models/candidate.model';
-import { SelectItem } from 'primeng/api';
+import { Candidate, DeleteCandidate } from '../models/candidate.model';
+import { MessageService, SelectItem } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
-import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-show-candidate',
@@ -30,13 +29,16 @@ export class ShowCandidateComponent implements OnInit {
   // Map to display data associate with foreign keys
   technologyMap: Map<number, string> = new Map();
 
-  constructor(private service: CandidateTableApiService) {}
+  constructor(
+    private service: CandidateTableApiService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
+  ) {}
 
   ngOnInit(): void {
     this.technologyList$ = this.service.getTechnologiesList();
 
     this.service.getCandidatesList().subscribe((data) => {
-      console.log(data);
       this.candidates = data;
       this.candidates.forEach((candidate) => candidate.whenWasContacted);
       //this.totalRecords = res.totalRecords;
@@ -44,7 +46,6 @@ export class ShowCandidateComponent implements OnInit {
     });
 
     this.service.getTechnologiesList().subscribe((response: any[]) => {
-      console.log(response);
       this.technologyOptions = response.map((x) => {
         return { value: x.id, label: x.technologyName };
       });
@@ -65,23 +66,35 @@ export class ShowCandidateComponent implements OnInit {
     this.technologyOptions = value;
   }
 
-  // deleteProduct(candidates: Candidate) {
-  //   this.confirmationService.confirm({
-  //     message: 'Are you sure you want to delete ' + candidates.name + '?',
-  //     header: 'Confirm',
-  //     icon: 'pi pi-exclamation-triangle',
-  //     accept: () => {
-  //       this.candidates = this.candidates.filter((val) => val.id !== candidate.id);
-  //       this.candidate = {};
-  //       this.messageService.add({
-  //         severity: 'success',
-  //         summary: 'Successful',
-  //         detail: 'Product Deleted',
-  //         life: 3000,
-  //       });
-  //     },
-  //   });
-  //}
+  refreshCandidate() {
+    this.messageService.add({
+      key: 'myKey1',
+      severity: 'success',
+      summary: 'Successful',
+      detail: 'Product Deleted',
+      life: 3000,
+    }),
+      this.service.getCandidatesList().subscribe((data) => {
+        this.candidates = data;
+        this.candidates.forEach((candidate) => candidate.whenWasContacted);
+        //this.totalRecords = res.totalRecords;
+        this.loading = false;
+      });
+  }
+
+  deleteCandidate(candidates: DeleteCandidate) {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete ' + candidates.name + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      key: 'account',
+      accept: () => {
+        this.service
+          .deleteCandidate(candidates.id)
+          .subscribe((res) => this.refreshCandidate());
+      },
+    });
+  }
 
   // onSelectAllChange(event) {
   //   const checked = event.checked;

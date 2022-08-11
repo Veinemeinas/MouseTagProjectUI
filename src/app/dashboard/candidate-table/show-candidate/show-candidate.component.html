@@ -105,18 +105,21 @@
           ><button
             pButton
             pRipple
-            icon="pi pi-pencil"
             class="p-button-rounded p-button-success p-mr-2"
-          ></button
-        ></span>
+          >
+            <span class="material-icons-sharp"> edit </span>
+          </button></span
+        >
         <span>
           <button
             pButton
             pRipple
-            icon="pi pi-trash"
             class="p-button-rounded p-button-warning"
-          ></button
-        ></span>
+            (click)="deleteCandidate(candidate)"
+          >
+            <span class="material-icons-sharp"> delete_forever </span>
+          </button></span
+        >
       </td>
     </tr>
   </ng-template>

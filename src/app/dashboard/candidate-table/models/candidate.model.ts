@@ -8,3 +8,8 @@ export class Candidate {
   technologyIds: number[];
   willBeContacted: string;
 }
+
+export class DeleteCandidate {
+  id: number;
+  name: string;
+}
