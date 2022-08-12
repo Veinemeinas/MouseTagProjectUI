@@ -23,6 +23,9 @@
             required
           />
           <label for="floatingInput">El.paštas</label>
+          <small id="username2-help" class="p-error block" *ngIf="emptyEmail"
+            >Įveskite El.paštą!</small
+          >
         </div>
         <div class="form-floating mb-3">
           <select
@@ -35,6 +38,9 @@
             <option value="User" selected>User</option>
           </select>
           <label for="floatingInput">Rolė</label>
+          <small id="username2-help" class="p-error block" *ngIf="emptyEmail"
+            >Pasirinkite Rolę!</small
+          >
         </div>
 
         <div class="form-floating mb-3">
@@ -51,6 +57,9 @@
           <label data-error="Privalomas laukas!" for="floatingPassword"
             >Slaptažodis</label
           >
+          <small id="username2-help" class="p-error block" *ngIf="emptyPassword"
+            >Įveskite slaptažodį!</small
+          >
         </div>
 
         <div class="form-floating">
@@ -58,7 +67,7 @@
             type="password"
             class="form-control"
             #Password="ngModel"
-            name="Password"
+            name="confirmPassword"
             [(ngModel)]="account.confirmPassword"
             id="floatingPassword"
             placeholder="Password"
@@ -67,14 +76,19 @@
           <label data-error="Privalomas laukas!" for="floatingPassword"
             >Patvirtinti slaptažodi</label
           >
+          <small
+            id="username2-help"
+            class="p-error block"
+            *ngIf="emptyConfirmPassword"
+            >Patvirtinkite slaptažodį!</small
+          >
+          <small id="username2-help" class="p-error block" *ngIf="matchPassword"
+            >Slaptažodžiai nesutampa!</small
+          >
         </div>
 
         <div class="d-grid gap-2 mt-3">
-          <button
-            [disabled]="!userRegistrationForm.valid"
-            class="btn btn-primary pt-2 pb-2"
-            type="submit"
-          >
+          <button class="btn btn-primary pt-2 pb-2" type="submit">
             Pridėti naują vartotoją
           </button>
         </div>

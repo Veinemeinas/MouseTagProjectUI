@@ -1,7 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CandidateTableApiService } from '../services/candidate-table-api.service';
-import { AddCandidate, Candidate, DeleteCandidate, UpdateCandidate } from '../models/candidate.model';
+import {
+  AddCandidate,
+  Candidate,
+  DeleteCandidate,
+  UpdateCandidate,
+} from '../models/candidate.model';
 import { FilterService, MessageService, SelectItem } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { Table } from 'primeng/table';
@@ -21,6 +26,10 @@ export class ShowCandidateComponent implements OnInit {
   editDialog: boolean = false;
 
   addDialog: boolean = false;
+
+  initAddTechDialog: boolean = false;
+
+  initUplDialog: boolean = false;
 
   totalRecords: number;
 
@@ -155,85 +164,92 @@ export class ShowCandidateComponent implements OnInit {
     });
   }
 
-  editCandidate(candidates: Candidate, updateCandidate: UpdateCandidate, id : number, technologies : Array<any>) {
+  editCandidate(
+    candidates: Candidate,
+    updateCandidate: UpdateCandidate,
+    id: number,
+    technologies: Array<any>
+  ) {
     this.updateCandidate = {
       id: id,
-      whenWasContacted: new Date(candidates.whenWasContacted[candidates.whenWasContacted.length - 1]),
+      whenWasContacted: new Date(
+        candidates.whenWasContacted[candidates.whenWasContacted.length - 1]
+      ),
       name: candidates.name,
       surname: candidates.surname,
       linkedin: candidates.linkedin,
       comment: candidates.comment,
       available: true,
-      technologyIds: technologies.map(a => a.id),
+      technologyIds: technologies.map((a) => a.id),
       willBeContacted: new Date(candidates.willBeContacted),
     };
     this.editDialog = true;
-    
   }
 
-  addCandidate()
-  {
+  addCandidate() {
     this.addDialog = true;
   }
 
-  saveNewCandidate(candidate : AddCandidate)
-  {
+  addTechDial() {
+    this.initAddTechDialog = true;
+  }
+
+  uploadDial() {
+    this.initUplDialog = true;
+  }
+
+  saveNewCandidate(candidate: AddCandidate) {
     this.emptyName = false;
     this.emptySurname = false;
     this.foundIt = false;
-    
-    if(candidate.name == '')
-    {
+
+    if (candidate.name == '') {
       this.emptyName = true;
     }
-    if(candidate.surname == '')
-    {
+    if (candidate.surname == '') {
       this.emptySurname = true;
     }
-    if(!this.emptyName && !this.emptySurname)
-    {
-      for (var i = 0; i < this.candidates.length; i++)
-      {
+    if (!this.emptyName && !this.emptySurname) {
+      for (var i = 0; i < this.candidates.length; i++) {
         if (
-              this.candidates[i].name.toLowerCase() ==
-              candidate.name.toLowerCase() &&
-              this.candidates[i].surname.toLowerCase() ==
-              candidate.surname.toLowerCase()
-          )
-          {
-            this.foundIt = true;
-          } 
-      } 
+          this.candidates[i].name.toLowerCase() ==
+            candidate.name.toLowerCase() &&
+          this.candidates[i].surname.toLowerCase() ==
+            candidate.surname.toLowerCase()
+        ) {
+          this.foundIt = true;
+        }
+      }
     }
-    if(!this.emptyName && !this.emptySurname && !this.foundIt)
-    {
-      this.service.addCandidate(candidate).subscribe((res) => this.refreshCandidateAdd());
+    if (!this.emptyName && !this.emptySurname && !this.foundIt) {
+      this.service
+        .addCandidate(candidate)
+        .subscribe((res) => this.refreshCandidateAdd());
       this.addDialog = false;
     }
   }
 
-  saveCandidate()
-  {
-      this.service.updateCandidate(this.updateCandidate.id, this.updateCandidate)
-        .subscribe((res) => this.refreshCandidate('Kandidatas atnaujintas'));
-      this.editDialog = false;
-    };
+  saveCandidate() {
+    this.service
+      .updateCandidate(this.updateCandidate.id, this.updateCandidate)
+      .subscribe((res) => this.refreshCandidate('Kandidatas atnaujintas'));
+    this.editDialog = false;
   }
+}
 
-  // onSelectAllChange(event) {
-  //   const checked = event.checked;
+// onSelectAllChange(event) {
+//   const checked = event.checked;
 
-  //   if (checked) {
-  //     this.service.getCandidatesList().subscribe((data) => {
-  //       console.log(data);
-  //       this.candidates = data;
-  //       this.candidates.forEach((candidate) => candidate.whenWasContacted);
-  //       this.selectAll = true;
-  //       this.loading = false;
-  //     });
-  //   } else {
-  //     this.technologyOptions = [];
-  //     this.selectAll = false;
-  //   }
-  // }
-
+//   if (checked) {
+//     this.service.getCandidatesList().subscribe((data) => {
+//       console.log(data);
+//       this.candidates = data;
+//       this.candidates.forEach((candidate) => candidate.whenWasContacted);
+//       this.selectAll = true;
+//       this.loading = false;
+//     });
+//   } else {
+//     this.technologyOptions = [];
+//     this.selectAll = false;
+//   }
+// }

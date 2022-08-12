@@ -14,16 +14,20 @@ import { LoginComponent } from './login-ui/login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { DashboardRoutingModule } from './dashboard/dashboard-routing.module';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, PageNotFoundComponent],
   imports: [
     CommonModule,
     BrowserModule,
+    DashboardRoutingModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     DashboardModule,
+    ToastModule,
   ],
 
   providers: [

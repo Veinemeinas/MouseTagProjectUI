@@ -25,6 +25,11 @@ const routes: Routes = [
       { path: 'settings', component: SettingsPageComponent },
     ],
   },
+  {
+    path: 'dashboard',
+    redirectTo: 'dashboard/candidates-table',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

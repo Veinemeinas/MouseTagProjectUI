@@ -7,6 +7,7 @@
             <div class="text-center">
               <img class="p-4" src="/assets/images/logo_rgb.svg" alt="Logo" />
             </div>
+            <p-toast class="ttoast" key="myKey2"></p-toast>
             <form
               #userLoginForm="ngForm"
               autocomplete="off"
@@ -24,7 +25,12 @@
                   required
                 />
                 <label for="floatingInput">El.paštas</label>
-                <div class="invalid-feedback">Please provide</div>
+                <small
+                  id="username2-help"
+                  class="p-error block"
+                  *ngIf="emptyEmail"
+                  >Įveskite El.paštą!</small
+                >
               </div>
 
               <div class="form-floating">
@@ -39,6 +45,12 @@
                   required
                 />
                 <label for="floatingPassword">Slaptažodis</label>
+                <small
+                  id="username2-help"
+                  class="p-error block"
+                  *ngIf="emptyPassword"
+                  >Įveskite slaptažodį!</small
+                >
               </div>
 
               <!-- Checkbox -->
