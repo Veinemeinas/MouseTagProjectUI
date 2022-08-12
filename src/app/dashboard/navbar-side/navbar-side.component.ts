@@ -20,9 +20,13 @@ interface SideNavToggle {
   styleUrls: ['./navbar-side.component.css'],
 })
 export class NavbarSideComponent implements OnInit {
+  addUser: boolean = true;
+
   constructor(private router: Router, private jwtHelper: JwtHelperService) {}
 
   email = this.getUserProfile();
+
+  role = this.getUserProfileRole();
 
   @Output() onToggleSideNav: EventEmitter<SideNavToggle> = new EventEmitter();
   collapsed = false;
@@ -43,6 +47,8 @@ export class NavbarSideComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth;
+    this.checkRole();
+    console.log(this.addUser);
   }
 
   toggleCollapse(): void {
@@ -73,5 +79,21 @@ export class NavbarSideComponent implements OnInit {
     const email = tokendec['Email'];
     var res = email.split('@');
     return res[0];
+  }
+
+  getUserProfileRole() {
+    var token = JSON.stringify(localStorage.getItem('token'));
+    console.log(this.jwtHelper.decodeToken(token));
+    const tokendec = this.jwtHelper.decodeToken(token);
+    const role =
+      tokendec['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    return role;
+  }
+
+  checkRole() {
+    this.addUser = true;
+    if (this.role == 'User') {
+      this.addUser = false;
+    }
   }
 }

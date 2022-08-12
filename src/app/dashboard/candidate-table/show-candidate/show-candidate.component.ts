@@ -10,6 +10,7 @@ import {
 import { FilterService, MessageService, SelectItem } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-show-candidate',
@@ -17,6 +18,10 @@ import { Table } from 'primeng/table';
   styleUrls: ['./show-candidate.component.css'],
 })
 export class ShowCandidateComponent implements OnInit {
+  addUser: boolean = true;
+
+  role = this.getUserProfileRole();
+
   technologyFilterName = 'technology-equals';
 
   @ViewChild('dt') table: Table;
@@ -59,10 +64,12 @@ export class ShowCandidateComponent implements OnInit {
     private service: CandidateTableApiService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private filterService: FilterService
+    private filterService: FilterService,
+    private jwtHelper: JwtHelperService
   ) {}
 
   ngOnInit(): void {
+    this.checkRole();
     this.filterService.register(
       this.technologyFilterName,
       (value: any[], filter: number[]) => {
@@ -234,6 +241,22 @@ export class ShowCandidateComponent implements OnInit {
       .updateCandidate(this.updateCandidate.id, this.updateCandidate)
       .subscribe((res) => this.refreshCandidate('Kandidatas atnaujintas'));
     this.editDialog = false;
+  }
+
+  getUserProfileRole() {
+    var token = JSON.stringify(localStorage.getItem('token'));
+    console.log(this.jwtHelper.decodeToken(token));
+    const tokendec = this.jwtHelper.decodeToken(token);
+    const role =
+      tokendec['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    return role;
+  }
+
+  checkRole() {
+    this.addUser = true;
+    if (this.role == 'User') {
+      this.addUser = false;
+    }
   }
 }
 

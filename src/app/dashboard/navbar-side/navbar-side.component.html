@@ -27,22 +27,45 @@
         <span class="sidenav-link-text" *ngIf="collapsed">{{ email }}</span>
       </a>
     </li>
-    <li class="sidenav-nav-item" *ngFor="let data of navData">
+    <li class="sidenav-nav-item">
       <a
         class="sidenav-nav-link"
-        [routerLink]="[data.routeLink]"
+        [routerLink]="['candidates-table']"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
       >
         <i class="sidenav-link-icon"
-          ><span class="material-icons-sharp">{{ data.label }}</span></i
+          ><span class="material-icons-sharp">grid_view</span></i
         >
-        <span class="sidenav-link-text" *ngIf="collapsed">{{
-          data.title
-        }}</span>
+        <span class="sidenav-link-text" *ngIf="collapsed"> Kandidatai </span>
       </a>
     </li>
-
+    <li class="sidenav-nav-item">
+      <a
+        class="sidenav-nav-link"
+        [routerLink]="['calendar']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="sidenav-link-icon"
+          ><span class="material-icons-sharp">calendar_month</span></i
+        >
+        <span class="sidenav-link-text" *ngIf="collapsed"> Kalendorius </span>
+      </a>
+    </li>
+    <li class="sidenav-nav-item" *ngIf="addUser">
+      <a
+        class="sidenav-nav-link"
+        [routerLink]="['settings']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="sidenav-link-icon"
+          ><span class="material-icons-sharp">manage_accounts</span></i
+        >
+        <span class="sidenav-link-text" *ngIf="collapsed"> Vartotojai </span>
+      </a>
+    </li>
     <li class="sidenav-nav-item">
       <a class="sidenav-nav-link" (click)="onLogout()">
         <i class="sidenav-link-icon"
