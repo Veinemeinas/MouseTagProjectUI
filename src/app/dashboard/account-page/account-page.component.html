@@ -1,16 +1,30 @@
 <div class="card">
   <div class="card-head">Profilis</div>
-  <div class="card-body">
-    <div class="card-body">
-      <img
-        src="/assets/images/User_icon.jpg"
-        alt="avatar"
-        class="rounded-circle img-fluid"
-        style="width: 150px"
-      />
-      <h5 class="my-3">{{ email }}</h5>
-      <p class="text-muted mb-1">Priskirta rolė:</p>
-      <p class="text-muted mb-4">{{ role }}</p>
+  <div class="card-body" style="width: 450px">
+    <div
+      class="single_advisor_profile wow fadeInUp"
+      data-wow-delay="0.2s"
+      style="
+        visibility: visible;
+        animation-delay: 0.2s;
+        animation-name: fadeInUp;
+      "
+    >
+      <!-- Team Thumb-->
+      <div class="advisor_thumb">
+        <img src="/assets/images/User_icon.jpg" alt="" />
+        <!-- Social Info-->
+        <div class="social-info">
+          <a href="#"><i class="fa fa-facebook"></i></a
+          ><a href="#"><i class="fa fa-twitter"></i></a
+          ><a href="#"><i class="fa fa-linkedin"></i></a>
+        </div>
+      </div>
+      <!-- Team Details-->
+      <div class="single_advisor_details_info">
+        <h6>{{ email }}</h6>
+        <p class="designation">Priskirta rolė: #{{ role }}</p>
+      </div>
     </div>
   </div>
 </div>

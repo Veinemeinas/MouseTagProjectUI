@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, enableProdMode } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CandidateTableApiService } from '../services/candidate-table-api.service';
 import {
@@ -18,7 +18,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: ['./show-candidate.component.css'],
 })
 export class ShowCandidateComponent implements OnInit {
-  addUser: boolean = true;
+  addUser: boolean = false;
 
   role = this.getUserProfileRole();
 
@@ -233,6 +233,19 @@ export class ShowCandidateComponent implements OnInit {
         .addCandidate(candidate)
         .subscribe((res) => this.refreshCandidateAdd());
       this.addDialog = false;
+      this.foundIt = false;
+      this.emptyName = false;
+      this.emptySurname = false;
+      this.addCandidateModel = {
+        whenWasContacted: new Date(Date.now()),
+        name: '',
+        surname: '',
+        linkedin: '',
+        comment: '',
+        available: true,
+        technologyIds: [],
+        willBeContacted: new Date(Date.now()),
+      };
     }
   }
 
@@ -253,9 +266,9 @@ export class ShowCandidateComponent implements OnInit {
   }
 
   checkRole() {
-    this.addUser = true;
+    this.addUser = false;
     if (this.role == 'User') {
-      this.addUser = false;
+      this.addUser = true;
     }
   }
 }

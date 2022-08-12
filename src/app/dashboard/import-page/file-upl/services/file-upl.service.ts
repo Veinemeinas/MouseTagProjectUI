@@ -14,7 +14,7 @@ export class FileUplService {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     let options = { headers: headers };
 
-    return this.https.post(this.rootUrl + '/api/Import', data).pipe(
+    return this.https.post(this.rootUrl + '/api/Import', data, options).pipe(
       catchError((error) => {
         return NEVER;
       })

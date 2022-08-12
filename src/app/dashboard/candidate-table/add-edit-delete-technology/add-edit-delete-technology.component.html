@@ -1,10 +1,5 @@
 <div class="p-20">
-  <form
-    #AddTechnologyForm="ngForm"
-    autocomplete="off"
-    (submit)="AddTechnology(AddTechnologyForm)"
-    novalidate
-  >
+  <form #AddTechnologyForm="ngForm" autocomplete="off" novalidate>
     <div class="row">
       <div class="col">
         <label class="mb-1" for="username1"
@@ -15,6 +10,7 @@
             name="technologyIds"
             [showHeader]="false"
             [displaySelectedLabel]="true"
+            [(ngModel)]="arrayTechIds"
             [options]="technologyOptions"
             [style]="{ width: '100%' }"
             [panelStyle]="{ width: '100%' }"
@@ -29,7 +25,7 @@
           icon="pi pi-minus"
           class="p-button-danger mt-2"
           label="Pašalinti"
-          type="submit"
+          (click)="DeleteTechnology()"
         ></button>
       </div>
     </div>
@@ -63,7 +59,7 @@
           icon="pi pi-plus"
           class="p-button-success mt-2"
           label="Pridėti"
-          type="submit"
+          (click)="AddTechnology(AddTechnologyForm)"
         ></button>
       </div>
     </div>

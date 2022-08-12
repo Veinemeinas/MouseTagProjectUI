@@ -39,15 +39,12 @@ export class FileUplComponent implements OnInit {
         this.Exel[index].technologyListAsString = this.data[index][5];
       }
       console.log(this.Exel);
-      this.datatest.email = 'user@example.com';
-      this.datatest.password = 'string';
-      console.log(this.datatest);
-      this.service.FileUpload(this.datatest).subscribe((data: any) => {
+      this.service.FileUpload(this.Exel).subscribe((data: any) => {
         this.messageService.add({
           key: 'myKey1',
           severity: 'success',
           summary: 'Successful',
-          detail: 'Product Deleted',
+          detail: 'Importinimas sėkmingas!',
           life: 3000,
         });
       });

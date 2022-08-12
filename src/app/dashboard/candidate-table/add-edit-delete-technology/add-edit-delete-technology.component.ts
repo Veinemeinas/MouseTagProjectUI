@@ -23,6 +23,8 @@ export class AddEditDeleteTechnologyComponent implements OnInit {
 
   technologyOptions: SelectItem<number>[];
 
+  arrayTechIds: number[] = [];
+
   ngOnInit(): void {
     this.service.getTechnologiesList().subscribe((response: any[]) => {
       console.log(response);
@@ -76,5 +78,35 @@ export class AddEditDeleteTechnologyComponent implements OnInit {
         });
       }
     }
+  }
+
+  DeleteTechnology() {
+    if (this.arrayTechIds.length == 0) {
+      return;
+    }
+    console.log(this.arrayTechIds);
+    var calcEnd = this.arrayTechIds.length;
+    var calc = 0;
+    for (let i = 0; i < this.arrayTechIds.length; i++) {
+      this.service.deleteTechnology(this.arrayTechIds[i]).subscribe();
+      calc++;
+      console.log(calc);
+    }
+    if (calc == calcEnd) {
+      this.messageService.add({
+        key: 'myKey1',
+        severity: 'success',
+        summary: 'Technologijos sėkmingai ištrintos!',
+      });
+      this.service.getTechnologiesList().subscribe((response: any[]) => {
+        console.log(response);
+        this.technologyOptions = response.map((x) => {
+          return { value: x.id, label: x.technologyName };
+        });
+      });
+      this.arrayTechIds = [];
+    }
+
+    this.resetForm();
   }
 }
